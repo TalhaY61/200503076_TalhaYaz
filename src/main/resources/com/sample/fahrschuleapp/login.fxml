@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #E5DEBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.fahrschuleapp.LoginController">
+   <top>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E5DEBF;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="157.0" fitWidth="304.0" layoutX="108.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../images/YAZFahrschule1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="138.0" layoutY="14.0" text="Username" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="138.0" layoutY="46.0" text="Password:" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernametxtfield" layoutX="215.0" layoutY="9.0" prefHeight="26.0" prefWidth="173.0" promptText="username">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="passwordtxtfield" layoutX="215.0" layoutY="41.0" prefHeight="26.0" prefWidth="173.0" promptText="password">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="loginbtn" layoutX="312.0" layoutY="98.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Login" textFill="#e5debf" textOverrun="WORD_ELLIPSIS">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Button>
+            <Text fill="#0d7c26" layoutX="14.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="yazfahrschule@hotmail.com" wrappingWidth="159.3232421875">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Text>
+            <Button fx:id="cancelbtn" layoutX="312.0" layoutY="132.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Cancel" textFill="#e5debf" textOverrun="WORD_ELLIPSIS">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="loginmissinglabel" layoutX="215.0" layoutY="76.0" textFill="RED">
+               <font>
+                  <Font name="Times New Roman Bold" size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

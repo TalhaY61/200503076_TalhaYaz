@@ -1,7 +1,9 @@
 package com.sample.fahrschuleapp;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -10,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,7 +43,7 @@ public class LoginController implements Initializable {
 
     }
 
-    public void loginButtonOnAction(ActionEvent event) {
+    public void loginButtonOnAction(ActionEvent event) throws IOException {
 
         if ((usernametxtfield.getText().isBlank() == false) && passwordtxtfield.getText().isBlank() == false) {
             validateLogin();
@@ -58,7 +61,6 @@ public class LoginController implements Initializable {
     public void validateLogin() {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-
         String verifyLogin = "SELECT count(1) FROM user_account WHERE username = ' " + usernametxtfield.getText() + " ' AND password = '" + passwordtxtfield.getText() + "'";
 
         try {
@@ -68,6 +70,7 @@ public class LoginController implements Initializable {
             while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     loginmissinglabel.setText("Congratulations");
+
                     //ändere Fenster zu admin glaube ich.
                 } else {
                     loginmissinglabel.setText("Invalid Login. Please Try Again!");

@@ -6,7 +6,6 @@ public class Fahrschueler extends Person{
     private String infolehrer;
     private int preis;
 
-
     public Fahrschueler(String name, String nachname, int alter, String geburtstag, String tlfnnummer, char geschlecht,
                        String ID, String email,char fuhrerscheinart, String infolehrer, int preis) {
         super(name, nachname, alter, geburtstag, tlfnnummer, geschlecht, ID, email);

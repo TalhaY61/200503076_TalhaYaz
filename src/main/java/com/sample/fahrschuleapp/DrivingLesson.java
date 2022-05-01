@@ -14,15 +14,12 @@ public class DrivingLesson {
     public String getDrivingStudent() {
         return drivingStudent;
     }
-
     public void setDrivingStudent(String drivingStudent) {
         this.drivingStudent = drivingStudent;
     }
-
     public String getDrivingInstructor() {
         return drivingInstructor;
     }
-
     public void setDrivingInstructor(String drivingInstructor) {
         this.drivingInstructor = drivingInstructor;
     }

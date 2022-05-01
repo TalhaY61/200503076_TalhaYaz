@@ -64,6 +64,7 @@ public class LoginController implements Initializable {
         stage.close();
     }
 
+    //WIRD ÜBERARBEITET!
     public void validateLogin() throws IOException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();

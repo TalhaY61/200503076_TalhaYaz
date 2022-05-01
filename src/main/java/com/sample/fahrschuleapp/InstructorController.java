@@ -7,16 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminController implements Initializable {
-
+public class InstructorController implements Initializable {
 
     @FXML
     private Button signin;
@@ -50,8 +47,6 @@ public class AdminController implements Initializable {
         //Ändere Seite auf Wählerseite und wähle von lehrer oder schüler aus
         //Füge dann diese
     }
-
-
 
 
 }

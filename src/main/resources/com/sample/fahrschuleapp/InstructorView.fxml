@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #E5DEBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.fahrschuleapp.AdminController">
+<BorderPane prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #E5DEBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.fahrschuleapp.InstructorController">
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="349.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="15.0" layoutY="15.0" text="Logged in as," textFill="#0d7c26">
+            <Label layoutX="15.0" layoutY="15.0" text="Logged in as," textFill="#0d7c26" AnchorPane.leftAnchor="15.0">
                <font>
                   <Font name="Times New Roman Bold" size="10.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="14.0" text="Administrator">
+            <Label layoutX="75.0" layoutY="14.0" text="Driving Instructor">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Label>
-            <Button fx:id="logoutbtn" alignment="CENTER" layoutX="15.0" layoutY="38.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: #0D7C26;" text="Logout" textFill="#e5debf">
+            <Button fx:id="logoutbtn" alignment="CENTER" layoutX="15.0" layoutY="38.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="15.0" prefWidth="50.0" style="-fx-background-color: #0D7C26;" text="Logout" textFill="#e5debf" AnchorPane.leftAnchor="15.0">
                <font>
                   <Font name="Times New Roman Bold" size="10.0" />
                </font>

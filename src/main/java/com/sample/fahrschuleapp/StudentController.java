@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminController implements Initializable {
+public class StudentController implements Initializable {
 
 
     @FXML
@@ -29,11 +29,11 @@ public class AdminController implements Initializable {
     private Scene scene;
     private Parent root;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-
 
     public void logoutButtonPressed(ActionEvent event) throws IOException {
 
@@ -50,8 +50,5 @@ public class AdminController implements Initializable {
         //Ändere Seite auf Wählerseite und wähle von lehrer oder schüler aus
         //Füge dann diese
     }
-
-
-
 
 }

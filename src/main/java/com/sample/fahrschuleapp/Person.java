@@ -4,21 +4,21 @@ package com.sample.fahrschuleapp;
 public class Person {
 
     private String name;
-    private String nachname;
-    private int alter;
-    private String geburtstag;
-    private String tlfnnummer;
-    private char geschlecht;
+    private String surName;
+    private int age;
+    private String bday;
+    private String phonenumber;
+    private char gender;
     private String ID;
     public String email;
 
-    public Person(String name, String nachname, int alter, String geburtstag, String tlfnnummer, char geschlecht, String ID, String email) {
+    public Person(String name, String surName, int age, String bday, String phonenumber, char gender, String ID, String email) {
         this.name = name;
-        this.nachname = nachname;
-        this.alter = alter;
-        this.geburtstag = geburtstag;
-        this.tlfnnummer = tlfnnummer;
-        this.geschlecht = geschlecht;
+        this.surName = surName;
+        this.age = age;
+        this.bday = bday;
+        this.phonenumber = phonenumber;
+        this.gender = gender;
         this.ID = ID;
         this.email = email;
     }
@@ -39,44 +39,44 @@ public class Person {
         this.ID = iD;
     }
 
-    public char getGeschlecht() {
-        return geschlecht;
+    public char getGender() {
+        return gender;
     }
 
-    public void setGeschlecht(char geschlecht) {
-        this.geschlecht = geschlecht;
+    public void setGender(char gender) {
+        this.gender = gender;
     }
 
-    public String getTlfnnummer() {
-        return tlfnnummer;
+    public String getPhoneNumber() {
+        return phonenumber;
     }
 
-    public void setTlfnnummer(String tlfnnummer) {
-        this.tlfnnummer = tlfnnummer;
+    public void setPhoneNumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
-    public String getGeburtstag() {
-        return geburtstag;
+    public String getBday() {
+        return bday;
     }
 
-    public void setGeburtstag(String geburtstag) {
-        this.geburtstag = geburtstag;
+    public void setBday(String bday) {
+        this.bday = bday;
     }
 
-    public int getAlter() {
-        return alter;
+    public int getAge() {
+        return age;
     }
 
-    public void setAlter(int alter) {
-        this.alter = alter;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getNachname() {
-        return nachname;
+    public String getSurName() {
+        return surName;
     }
 
-    public void setNachname(String nachname) {
-        this.nachname = nachname;
+    public void setSurName(String surName) {
+        this.surName = surName;
     }
 
     public String getName() {

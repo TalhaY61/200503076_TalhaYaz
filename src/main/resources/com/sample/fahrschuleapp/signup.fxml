@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #E5DEBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.fahrschuleapp.SignUpController">
+   <top>
+      <AnchorPane prefHeight="75.0" prefWidth="349.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="201.0" layoutY="26.0" text="Register-Page" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <right>
+      <AnchorPane prefHeight="325.0" prefWidth="519.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="40.0" layoutY="27.0" text="Name:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField layoutX="157.0" layoutY="22.0" prefHeight="25.0" prefWidth="168.0" promptText="name" AnchorPane.bottomAnchor="278.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="38.0" layoutY="59.0" text="Surname:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="93.0" text="Age:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="125.0" text="E-Mail:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="159.0" text="Phonenumber:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="193.0" text="Username:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="230.0" text="Password:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="39.0" layoutY="266.0" text="Gender:" textFill="#0d7c26" AnchorPane.leftAnchor="39.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <CheckBox contentDisplay="CENTER" layoutX="160.0" layoutY="265.0" mnemonicParsing="false" text="Male" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <CheckBox layoutX="230.0" layoutY="265.0" mnemonicParsing="false" text="Female" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </CheckBox>
+            <Button layoutX="358.0" layoutY="225.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #0D7C26;" text="Register" textFill="#e5debf">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <TextField layoutX="157.0" layoutY="54.0" prefHeight="25.0" prefWidth="168.0" promptText="surname">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="88.0" prefHeight="25.0" prefWidth="168.0" promptText="age">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="120.0" prefHeight="25.0" prefWidth="168.0" promptText="e-mail adress">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="154.0" prefHeight="25.0" prefWidth="168.0" promptText="phonenumber">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="188.0" prefHeight="25.0" prefWidth="168.0" promptText="username">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="157.0" layoutY="225.0" prefHeight="25.0" prefWidth="168.0" promptText="password">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <Button fx:id="cancelsigninbtn" layoutX="358.0" layoutY="261.0" mnemonicParsing="false" onAction="#cancelSignInButtonPressed" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #0D7C26;" text="Cancel" textFill="#e5debf">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

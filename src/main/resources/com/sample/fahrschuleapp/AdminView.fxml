@@ -29,7 +29,10 @@
       </AnchorPane>
    </top>
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="signupbtn" layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onAction="#sigupButtonPressed" text="Register" textFill="#0d7c26" />
+         </children></AnchorPane>
    </right>
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />

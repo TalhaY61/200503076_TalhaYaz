@@ -12,8 +12,8 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
-        stage.initStyle(StageStyle.UNDECORATED);
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        stage.setTitle("Fahrschule YAZ");
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -68,17 +68,7 @@
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Label>
-            <CheckBox contentDisplay="CENTER" layoutX="160.0" layoutY="265.0" mnemonicParsing="false" text="Male" textFill="#0d7c26">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </CheckBox>
-            <CheckBox layoutX="230.0" layoutY="265.0" mnemonicParsing="false" text="Female" textFill="#0d7c26">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </CheckBox>
-            <Button layoutX="358.0" layoutY="225.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #0D7C26;" text="Register" textFill="#e5debf">
+            <Button fx:id="registerbtn" layoutX="358.0" layoutY="225.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #0D7C26;" text="Register" textFill="#e5debf">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
@@ -118,6 +108,21 @@
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Button>
+            <RadioButton fx:id="rb_female" layoutX="238.0" layoutY="265.0" mnemonicParsing="false" text="Female" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rb_male" layoutX="157.0" layoutY="266.0" mnemonicParsing="false" text="Male" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </RadioButton>
+            <Label fx:id="registertxtlabel" layoutX="358.0" layoutY="205.0" prefHeight="17.0" prefWidth="121.0" textFill="RED">
+               <font>
+                  <Font name="Times New Roman Bold" size="10.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </right>

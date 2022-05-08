@@ -18,6 +18,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import com.sample.fahrschuleapp.SignUpController;
+
+import javax.xml.transform.Result;
 
 
 public class LogInController implements Initializable {
@@ -39,6 +42,8 @@ public class LogInController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    SignUpController signup = new SignUpController();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,16 +71,21 @@ public class LogInController implements Initializable {
         Connection connectDB = connectNow.getConnection();
 
         String verifyLogin = "SELECT count(1) FROM useraccounts WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
-
+        //String getRole = "SELECT * FROM useraccounts WHERE role LIKE '%" + signup.roletxtfield + "%'" ;
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
+
+            //Was ich hier versucht hab ist dass man die "ROLE" der hinzugefügten Person nimmt und somit dann
+            //entweder für Role = "Student" die StudentView öffen und für
+            //die Role = "Instructor" die InstructorView öffnen. Habe aber den Fehler:
+            // "Operation not allowed after Resultset closed" erhalten. Suche für eine Behebung!
+            //ResultSet roleResult = statement.executeQuery(getRole);
 
             while (queryResult.next()) {
                 //wenn das Acc existiert
                 if (queryResult.getInt(1) == 1) {
 
-                    //Habe bis jetzt nur 3 Default User erstellt, jeweils 1 Admin, 1 Student und 1 Lehrer.
                     //Habe Sign-UP fenster noch nicht hinbekommen. Arbeite dran.
 
                     //ADMIN LOG IN DATA
@@ -86,8 +96,13 @@ public class LogInController implements Initializable {
                        stage.setScene(new Scene(root, 520, 400));
                        stage.show();
                    }
-                } else {
-                    loginmissinglabel.setText("Invalid Login.");
+                } //else if (roleResult.getInt(1) == 1){
+                    //root = FXMLLoader.load(getClass().getResource("StudentView.fxml"));
+                    //stage = (Stage) loginbtn.getScene().getWindow();
+                    //stage.setScene(new Scene(root, 520, 400));
+                    //stage.show();
+                else {
+                    loginmissinglabel.setText("Invalid Login");
                 }
 
             }

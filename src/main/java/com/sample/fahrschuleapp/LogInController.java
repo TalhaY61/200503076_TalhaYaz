@@ -66,15 +66,23 @@ public class LogInController implements Initializable {
     }
 
     //WIRD ÜBERARBEITET!
+    //TODO!!! Finde einen Sql code für das checken des eingegebenen usernames und password
+    // welches in eines der 3 Table (lehrer, schüler, admin) existiert und öffne dann
+    // das geeignete fenster (lehrer,schüler, admin)!!!
+
     public void validateLogin() throws IOException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "SELECT count(1) FROM useraccounts WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
+        //TODO use the "join" method in sql to combine the tables and
+        // get username/ password to get the specifik window!!!.
+        String adminLogin = "SELECT count(1) FROM administrator WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
+        String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
         //String getRole = "SELECT * FROM useraccounts WHERE role LIKE '%" + signup.roletxtfield + "%'" ;
         try {
             Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifyLogin);
+            //ResultSet queryResult = statement.executeQuery(verifyLogin);
+            ResultSet queryResultAdmin = statement.executeQuery(adminLogin);
 
             //Was ich hier versucht hab ist dass man die "ROLE" der hinzugefügten Person nimmt und somit dann
             //entweder für Role = "Student" die StudentView öffen und für
@@ -82,12 +90,11 @@ public class LogInController implements Initializable {
             // "Operation not allowed after Resultset closed" erhalten. Suche für eine Behebung!
             //ResultSet roleResult = statement.executeQuery(getRole);
 
-            while (queryResult.next()) {
+            while ( /*queryResult.next() || */ queryResultAdmin.next()) {
                 //wenn das Acc existiert
-                if (queryResult.getInt(1) == 1) {
+                if (/*(queryResult.getInt(1) == 1) ||*/ (queryResultAdmin.getInt(1) == 1)) {
 
                     //Habe Sign-UP fenster noch nicht hinbekommen. Arbeite dran.
-
                     //ADMIN LOG IN DATA
                    if (usernametxtfield.getText().equals("admin1967") && passwordtxtfield.getText().equals("imtheadmin2361")) {
                        //Ändere auf Admin wenn admin einloggt.

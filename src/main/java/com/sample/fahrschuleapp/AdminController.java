@@ -17,11 +17,11 @@ public class AdminController implements Initializable {
 
 
     @FXML
-    private Button registerUserbtn; //für das registieren der studenten/lehrer
+    private Button registerInstructor, registerStudent; //für das registieren der studenten/lehrer
     @FXML
     private Button logoutbtn; //für das ausloggen
     @FXML
-    private Button deleteUserButton; //für deleten der student/lehrer
+    private Button deleteInstructor, deleteStudent; //für deleten der student/lehrer
 
     private Stage stage;
     private Scene scene;
@@ -38,17 +38,33 @@ public class AdminController implements Initializable {
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }
-    public void registerUserButtonPressed(ActionEvent event) throws IOException {
+    public void registerInstructorButtonPressed(ActionEvent event) throws IOException {
         //switche zur SignUp Seite und register die jeweilige Person.
-        root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+        root = FXMLLoader.load(getClass().getResource("InstructorSignUpPage.fxml"));
         stage = (Stage) logoutbtn.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }
-    public void deleteUserButtonOnAction(ActionEvent event) throws IOException {
+    public void registerStudentButtonPressed(ActionEvent event) throws IOException {
+        //switche zur SignUp Seite und register die jeweilige Person.
+        root = FXMLLoader.load(getClass().getResource("StudentSignUpPage.fxml"));
+        stage = (Stage) logoutbtn.getScene().getWindow();
+        stage.setScene(new Scene(root, 520, 400));
+        stage.show();
+    }
+
+    //delete button kann man verknüpfen denke ich
+    public void deleteInstructorButtonPressed(ActionEvent event) throws IOException {
         //switche zu delete seite
         root = FXMLLoader.load(getClass().getResource("deleteUserView.fxml"));
-        stage = (Stage) logoutbtn.getScene().getWindow();
+        stage = (Stage) deleteInstructor.getScene().getWindow();
+        stage.setScene(new Scene(root, 520, 400));
+        stage.show();
+    }
+    public void deleteStudentButtonOnAction(ActionEvent event) throws IOException {
+        //switche zu delete seite
+        root = FXMLLoader.load(getClass().getResource("deleteUserView.fxml"));
+        stage = (Stage) deleteStudent.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }

@@ -10,12 +10,12 @@
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="349.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="15.0" layoutY="15.0" text="Logged in as," textFill="#0d7c26">
+            <Label layoutX="14.0" layoutY="12.0" prefHeight="18.0" prefWidth="65.0" text="Logged in as," textFill="#0d7c26">
                <font>
                   <Font name="Times New Roman Bold" size="10.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="14.0" text="Administrator">
+            <Label layoutX="79.0" layoutY="14.0" text="Administrator">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
@@ -29,10 +29,27 @@
       </AnchorPane>
    </top>
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="347.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="registerUserbtn" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#registerUserButtonPressed" text="Register Student / Instructor" textFill="#0d7c26" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" />
-            <Button fx:id="deleteUserButton" layoutX="17.0" layoutY="45.0" mnemonicParsing="false" onAction="#deleteUserButtonOnAction" prefHeight="25.0" prefWidth="165.0" text="Delete Student / Instructor" textFill="#0d7c26" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="17.0" />
+            <Button fx:id="registerStudent" layoutX="167.0" layoutY="33.0" mnemonicParsing="false" onAction="#registerStudentButtonPressed" prefHeight="25.0" prefWidth="69.0" text="Student" textFill="#0d7c26" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="33.0" />
+            <Button fx:id="deleteStudent" layoutX="167.0" layoutY="65.0" mnemonicParsing="false" onAction="#deleteStudentButtonOnAction" prefHeight="25.0" prefWidth="70.0" text="Student" textFill="#0d7c26" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="14.0" />
+            <Button fx:id="registerInstructor" layoutX="90.0" layoutY="34.0" mnemonicParsing="false" onAction="#registerInstructorButtonPressed" prefHeight="25.0" prefWidth="70.0" text="Instructor" textFill="#0d7c26" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="34.0" />
+            <Button fx:id="deleteInstructor" layoutX="90.0" layoutY="64.0" mnemonicParsing="false" onAction="#deleteInstructorButtonPressed" prefHeight="25.0" prefWidth="71.0" text="Instructor" textFill="#0d7c26" AnchorPane.bottomAnchor="236.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="89.0" />
+            <Label layoutX="29.0" layoutY="39.0" text="Register:" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="70.0" text="Delete:" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="86.0" layoutY="5.0" prefHeight="18.0" prefWidth="79.0" text="Operations" textFill="#0d7c26">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
    </right>
    <left>

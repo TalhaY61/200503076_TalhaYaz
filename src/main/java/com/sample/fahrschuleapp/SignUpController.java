@@ -27,17 +27,15 @@ public class SignUpController implements Initializable {
     @FXML
     private Label registertxtlabel, deletetxtlabel;
     @FXML
-    public TextField roletxtfield;
-    @FXML
     private TextField nametxtfield;
     @FXML
     private TextField surnametxtfield;
     @FXML
-    private TextField agetxtfield;
+    private TextField agetxtfield, pricetxtfield;
     @FXML
-    private TextField emailtxtfield;
+    private TextField emailtxtfield, drivinglicensetxtfield;
     @FXML
-    private TextField phonenumbertxtfield, usernametxtfield, gendertxtfield;
+    private TextField phonenumbertxtfield, usernametxtfield, gendertxtfield, salarytxtfield;
     @FXML
     private PasswordField passwordtxtfield;
 
@@ -58,23 +56,21 @@ public class SignUpController implements Initializable {
         stage.show();
     }
 
-    public void registerButtonOnAction(ActionEvent event) throws IOException {
-
-        //wenn Daten erfolgreich eingetragen sind und
-        //der benutzer sich registriert hat, zeige eine Erfolgsnachricht.
-        //wenn nicht dann gebe eine ErrorMessage.
-        registerUser();
+    public void registerButtonInstructorPressed(ActionEvent event) throws IOException {
+        registerInstructor();
     }
     public void deleteButtonOnAction(ActionEvent event) throws IOException {
         deleteUser();
     }
+    public void registerButtonStudentPressed(ActionEvent event) throws IOException {
+        registerStudent();
+    }
 
-    public void registerUser(){
+    public void registerInstructor(){
         //Verknüpft die MySQL und hier wird dann der USER REGISTRIERT.
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String role = roletxtfield.getText();
         String firstname = nametxtfield.getText();
         String surname = surnametxtfield.getText();
         String age = agetxtfield.getText();
@@ -83,15 +79,46 @@ public class SignUpController implements Initializable {
         String username = usernametxtfield.getText();
         String password = passwordtxtfield.getText();
         String gender = gendertxtfield.getText();
+        String salary = salarytxtfield.getText();
 
-        String insertFields = "INSERT INTO useraccounts (Role, FirstName, SurName, Age, Email, Phonenumber, Gender , Username, Password) VALUES ('";
-        String insertValues = role + "','" + firstname + "','" + surname  + "','" + age  + "','" + email  + "','" + phonenumber  + "','" + gender  + "','" + username  + "','" + password + "');";
+        String insertFields = "INSERT INTO instructor (FirstName, SurName, Age, Email, Phonenumber, Gender, Salary, Username, Password) VALUES ('";
+        String insertValues = firstname + "','" + surname  + "','" + age  + "','" + email  + "','" + phonenumber  + "','" + gender  + "','" + salary  + "','" + username  + "','" + password + "');";
         String insertToRegister = insertFields + insertValues;
 
         try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(insertToRegister);
-            registertxtlabel.setText("User has been registered!");
+            registertxtlabel.setText("Instructor has been registered!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+    public void registerStudent(){
+        //Verknüpft die MySQL und hier wird dann der USER REGISTRIERT.
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        String firstname = nametxtfield.getText();
+        String surname = surnametxtfield.getText();
+        String age = agetxtfield.getText();
+        String email = emailtxtfield.getText();
+        String phonenumber = phonenumbertxtfield.getText();
+        String username = usernametxtfield.getText();
+        String password = passwordtxtfield.getText();
+        String gender = gendertxtfield.getText();
+        String price = pricetxtfield.getText();
+        String drivingLicense = drivinglicensetxtfield.getText();
+
+        String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, Gender, Price, DrivingLicenseType, Username, Password) VALUES ('";
+        String insertValues = firstname + "','" + surname  + "','" + age  + "','" + email  + "','" + phonenumber  + "','" + gender  + "','" + price  + "','" + drivingLicense  + "','" + username  + "','" + password + "');";
+        String insertToRegister = insertFields + insertValues;
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(insertToRegister);
+            registertxtlabel.setText("Student has been registered!");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,6 +126,8 @@ public class SignUpController implements Initializable {
         }
     }
 
+    //Problem beim löschen des schülers oder lehrers (15.05, 22:07)
+    //bozduk bunu kankss
     public void deleteUser() {
 
         DatabaseConnection connectNow = new DatabaseConnection();
@@ -107,7 +136,7 @@ public class SignUpController implements Initializable {
         String username = usernametxtfield.getText();
         String password = passwordtxtfield.getText();
 
-        String deleteUser = "DELETE FROM useraccounts WHERE Username=" + "'" + username + "';";
+        String deleteUser = "DELETE FROM instructor, student WHERE Username=" + "'" + username + "';";
         try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(deleteUser);

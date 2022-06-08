@@ -75,7 +75,7 @@ public class LogInController implements Initializable {
         Connection connectDB = connectNow.getConnection();
 
         //TODO use the "join" method in sql to combine the tables and
-        // get username/ password to get the specifik window!!!.
+        // get username/ password to get the specific window!!!.
         String adminLogin = "SELECT count(1) FROM administrator WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
         String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
         //String getRole = "SELECT * FROM useraccounts WHERE role LIKE '%" + signup.roletxtfield + "%'" ;

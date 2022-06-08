@@ -35,6 +35,14 @@ public class StudentController implements Initializable {
 
     }
 
+    //TODO ; Schüler soll den am nächsten stehenden Prüfungstermin sehen können
+    // und die entsprechende Note wenn die man an der Prüfung teilnimmt.
+    // Dies könnte als eine Tabelle veranschaulicht werden.
+
+    //TODO 2; Schüler soll den am nächsten stehende Fahrstunden sehen können,
+    // mit dem Namen des Lehrers daneben.
+
+
     public void logoutButtonPressed(ActionEvent event) throws IOException {
 
         //Das ist für den Scene wechsel, kannst du überall benutzen aber ändere den Namen des fxml file

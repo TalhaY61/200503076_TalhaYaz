@@ -67,6 +67,11 @@ public class SignUpController implements Initializable {
     }
 
     public void registerInstructor(){
+
+        //TODO Das Gehalt muss mehr als 4200TRY sein kontrolliere diesen.
+        //
+
+
         //Verknüpft die MySQL und hier wird dann der USER REGISTRIERT.
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
@@ -111,6 +116,7 @@ public class SignUpController implements Initializable {
         String price = pricetxtfield.getText();
         String drivingLicense = drivinglicensetxtfield.getText();
 
+
         String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, Gender, Price, DrivingLicenseType, Username, Password) VALUES ('";
         String insertValues = firstname + "','" + surname  + "','" + age  + "','" + email  + "','" + phonenumber  + "','" + gender  + "','" + price  + "','" + drivingLicense  + "','" + username  + "','" + password + "');";
         String insertToRegister = insertFields + insertValues;
@@ -126,8 +132,11 @@ public class SignUpController implements Initializable {
         }
     }
 
-    //Problem beim löschen des schülers oder lehrers (15.05, 22:07)
-    //bozduk bunu kankss
+    //FIXME Problem beim löschen des schülers oder lehrers (15.05, 22:07)
+    // Es wird wahrscheinlich eine "JOIN" verknüpfung gebraucht. Look SQL
+    // bozduk bunu kankss
+
+
     public void deleteUser() {
 
         DatabaseConnection connectNow = new DatabaseConnection();

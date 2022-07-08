@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SignUpController implements Initializable {
@@ -43,6 +44,8 @@ public class SignUpController implements Initializable {
     private Scene scene;
     private Parent root;
 
+    DatabaseConnection dc = new DatabaseConnection();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -50,7 +53,7 @@ public class SignUpController implements Initializable {
 
     public void cancelSignInButtonPressed(ActionEvent event) throws IOException {
         //switch zur AdminView und dort kann man weiter machen.
-        root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
         stage = (Stage) cancelsigninbtn.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
@@ -69,9 +72,6 @@ public class SignUpController implements Initializable {
     public void registerInstructor(){
 
         //TODO Das Gehalt muss mehr als 4200TRY sein kontrolliere diesen.
-        //
-
-
         //Verknüpft die MySQL und hier wird dann der USER REGISTRIERT.
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
@@ -86,13 +86,11 @@ public class SignUpController implements Initializable {
         String gender = gendertxtfield.getText();
         String salary = salarytxtfield.getText();
 
-        String insertFields = "INSERT INTO instructor (FirstName, SurName, Age, Email, Phonenumber, Gender, Salary, Username, Password) VALUES ('";
-        String insertValues = firstname + "','" + surname  + "','" + age  + "','" + email  + "','" + phonenumber  + "','" + gender  + "','" + salary  + "','" + username  + "','" + password + "');";
-        String insertToRegister = insertFields + insertValues;
+        String registered = dc.registerInstructor(firstname, surname, age, email, phonenumber, gender, salary, username, password);
 
         try {
             Statement statement = connectDB.createStatement();
-            statement.executeUpdate(insertToRegister);
+            statement.executeUpdate(registered);
             registertxtlabel.setText("Instructor has been registered!");
 
         } catch (Exception e) {
@@ -116,16 +114,11 @@ public class SignUpController implements Initializable {
         String price = pricetxtfield.getText();
         String drivingLicense = drivinglicensetxtfield.getText();
 
-
-        String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, Gender, Price, DrivingLicenseType, Username, Password) VALUES ('";
-        String insertValues = firstname + "','" + surname  + "','" + age  + "','" + email  + "','" + phonenumber  + "','" + gender  + "','" + price  + "','" + drivingLicense  + "','" + username  + "','" + password + "');";
-        String insertToRegister = insertFields + insertValues;
-
+        String registered = dc.registerStudent(firstname, surname, age, email, phonenumber, gender, price, drivingLicense, username, password);
         try {
             Statement statement = connectDB.createStatement();
-            statement.executeUpdate(insertToRegister);
+            statement.executeUpdate(registered);
             registertxtlabel.setText("Student has been registered!");
-
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
@@ -139,6 +132,8 @@ public class SignUpController implements Initializable {
 
     public void deleteUser() {
 
+        //TODO Zeige eine kleine Tabelle wo die Schüler stehen
+        // mit den zugehörigen Lehrern und das nächst stehende Fahrtermin.
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 

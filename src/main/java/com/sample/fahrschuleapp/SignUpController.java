@@ -86,12 +86,19 @@ public class SignUpController implements Initializable {
         String gender = gendertxtfield.getText();
         String salary = salarytxtfield.getText();
 
+
         String registered = dc.registerInstructor(firstname, surname, age, email, phonenumber, gender, salary, username, password);
 
         try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(registered);
             registertxtlabel.setText("Instructor has been registered!");
+            //After Registered change scene to AdminView.
+            root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
+            stage = (Stage) registerbtn.getScene().getWindow();
+            stage.setScene(new Scene(root, 520, 400));
+            stage.show();
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,6 +128,12 @@ public class SignUpController implements Initializable {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(registered);
             registertxtlabel.setText("Student has been registered!");
+
+            //After Registered change scene to AdminView.
+            root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
+            stage = (Stage) registerbtn.getScene().getWindow();
+            stage.setScene(new Scene(root, 520, 400));
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
@@ -136,22 +149,7 @@ public class SignUpController implements Initializable {
 
         //TODO Zeige eine kleine Tabelle wo die Schüler stehen
         // mit den zugehörigen Lehrern und das nächst stehende Fahrtermin.
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
 
-        String username = usernametxtfield.getText();
-        String password = passwordtxtfield.getText();
-
-        String deleteUser = "DELETE FROM instructor, student WHERE Username=" + "'" + username + "';";
-        try {
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(deleteUser);
-            deletetxtlabel.setText("User has been removed!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
     }
 
 

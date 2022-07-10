@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -39,11 +36,17 @@ public class AdminController implements Initializable {
     private Button deleteUserBtn; //für deleten der student/lehrer
     @FXML
     private Button addDrivingLessonBtn, viewDrivingLessonBtn;
+    @FXML
+    private Button refreshbtn;
+    @FXML
+    private Label messageLabel;
 
     @FXML
     private TableView<UserSearchModel> userTabelView;
     @FXML
     private TableColumn<UserSearchModel, String> roleColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> usernameColumn;
     @FXML
     private TableColumn<UserSearchModel, String> surnameColumn;
     @FXML
@@ -53,6 +56,7 @@ public class AdminController implements Initializable {
 
     ObservableList<UserSearchModel> userSearchObserverList = FXCollections.observableArrayList();
 
+    DatabaseConnection connectNow = new DatabaseConnection();
 
     private Stage stage;
     private Scene scene;
@@ -60,13 +64,13 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DatabaseConnection connectNow = new DatabaseConnection();
+
         Connection connectDB = connectNow.getConnection();
 
         //SQL Query - Execute in the backend Database
-        String userViewQuery = "SELECT Role, FirstName, SurName FROM instructor\n" +
+        String userViewQuery = "SELECT Role, Username, FirstName, SurName FROM instructor\n" +
                 "UNION\n" +
-                "SELECT Role, FirstName, SurName FROM student";
+                "SELECT Role, Username, FirstName, SurName FROM student";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -74,19 +78,22 @@ public class AdminController implements Initializable {
 
             while(queryOutput.next()) {
 
-                String queryID = queryOutput.getString("Role");
+                String queryRole = queryOutput.getString("Role");
+                String queryUsername = queryOutput.getString("Username");
                 String queryFirstName = queryOutput.getString("FirstName");
                 String querySurName = queryOutput.getString("SurName");
 
                 //Populate the ObservableList
-                userSearchObserverList.add(new UserSearchModel(queryID, queryFirstName, querySurName));
+                userSearchObserverList.add(new UserSearchModel(queryRole, queryUsername, queryFirstName, querySurName));
             }
 
             roleColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
+            usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
             firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
             surnameColumn.setCellValueFactory(new PropertyValueFactory<>("SurName"));
 
             userTabelView.setItems(userSearchObserverList);
+            userTabelView.refresh();
 
             /*
             //Initila filtered List
@@ -145,14 +152,54 @@ public class AdminController implements Initializable {
     }
 
     //delete button kann man verknüpfen denke ich
+
     public void deleteUserButtonPressed(ActionEvent event) throws IOException {
-        //switche zu delete seite
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("deleteUserView.fxml")));
-        stage = (Stage) deleteUserBtn.getScene().getWindow();
-        stage.setScene(new Scene(root, 520, 400));
-        stage.show();
+        //delete den ausgewählten user
+
+        if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Student")) {
+            DatabaseConnection connectNow = new DatabaseConnection();
+            Connection connectDB = connectNow.getConnection();
+            String name = userTabelView.getSelectionModel().getSelectedItem().getFirstName();
+
+            String deleteUser = "DELETE FROM Student WHERE FirstName = '" + name + "';";
+            try {
+                Statement statement = connectDB.createStatement();
+                statement.executeUpdate(deleteUser);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+            }
+        } else if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Instructor")) {
+            DatabaseConnection connectNow = new DatabaseConnection();
+            Connection connectDB = connectNow.getConnection();
+            String name = userTabelView.getSelectionModel().getSelectedItem().getFirstName();
+
+            String deleteUser = "DELETE FROM Instructor WHERE FirstName = '" + name + "';";
+            try {
+                Statement statement = connectDB.createStatement();
+                statement.executeUpdate(deleteUser);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+            }
+        }else {
+            messageLabel.setText("Error! Could not delete the selected User. Try Again!");
+        }
     }
 
+    // TODO Refresh Button für TableView funktioniert nicht!
+    public void refreshButtonPressed(ActionEvent event) {
+        userTabelView.refresh();
+    }
+
+    public void updateInstructorButtonPressed() {
+
+    }
+    public void updateStudentButtonPressed() {
+
+    }
     public void viewDrivingLessonButtonPressed(ActionEvent event) {
         //Das ansehen der Fahrstunden der Schüler in einer Art Kalender vlt
     }
@@ -162,6 +209,7 @@ public class AdminController implements Initializable {
         //Das hinzufügen von Fahrstunden für die Schüler, für neu
         // angemeldete und bevorstehende.
     }
+
 
 
 }

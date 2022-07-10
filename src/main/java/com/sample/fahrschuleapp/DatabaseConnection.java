@@ -2,6 +2,7 @@ package com.sample.fahrschuleapp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class DatabaseConnection {
 
@@ -20,7 +21,6 @@ public class DatabaseConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return databaseLink;
     }
 
@@ -41,5 +41,10 @@ public class DatabaseConnection {
         String insertToRegister = insertFields + insertValues;
 
         return insertToRegister;
+    }
+
+    public void deleteInstructor() {
+
+
     }
 }

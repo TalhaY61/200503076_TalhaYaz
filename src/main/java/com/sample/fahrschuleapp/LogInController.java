@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import com.sample.fahrschuleapp.SignUpController;
@@ -66,57 +67,42 @@ public class LogInController implements Initializable {
         stage.close();
     }
 
-    //WIRD ÜBERARBEITET!
-    //TODO!!! Finde einen Sql code für das checken des eingegebenen usernames und password
-    // welches in eines der 3 Table (lehrer, schüler, admin) existiert und öffne dann
-    // das geeignete fenster (lehrer,schüler, admin)!!!
-
     public void validateLogin() throws IOException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        //TODO use the "join" method in sql to combine the tables and
-        // get username/ password to get the specific window!!!.
+        //Wenn Admin einloggt.
+        if (usernametxtfield.getText().equals("root") && passwordtxtfield.getText().equals("2361")) {
+            //Ändere auf Admin wenn admin einloggt.
+            root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
+            stage = (Stage) loginbtn.getScene().getWindow();
+            stage.setScene(new Scene(root, 520, 400));
+            stage.show();
+        }
 
-        String adminLogin = "SELECT count(1) FROM administrator WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
-        //String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
-        //String getRole = "SELECT * FROM useraccounts WHERE role LIKE '%" + signup.roletxtfield + "%'" ;
+        String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
+
         try {
             Statement statement = connectDB.createStatement();
-            //ResultSet queryResult = statement.executeQuery(verifyLogin);
-            ResultSet queryResultAdmin = statement.executeQuery(adminLogin);
+            ResultSet queryResult = statement.executeQuery(verifyLogin);
 
-            //Was ich hier versucht hab ist dass man die "ROLE" der hinzugefügten Person nimmt und somit dann
-            //entweder für Role = "Student" die StudentView öffen und für
-            //die Role = "Instructor" die InstructorView öffnen. Habe aber den Fehler:
-            // "Operation not allowed after Resultset closed" erhalten. Suche für eine Behebung!
-            //ResultSet roleResult = statement.executeQuery(getRole);
+            while (queryResult.next()) {
 
-            while ( /*queryResult.next() || */ queryResultAdmin.next()) {
-                //wenn das Acc existiert
-                if (/*(queryResult.getInt(1) == 1) ||*/ (queryResultAdmin.getInt(1) == 1)) {
+                //wenn der User existiert
+                if ((queryResult.getInt(1) == 1)) {
 
-                    //ADMIN LOG IN DATA
-                   if (usernametxtfield.getText().equals("admin1967") && passwordtxtfield.getText().equals("imtheadmin2361")) {
-                       //Ändere auf Admin wenn admin einloggt.
-                       root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
-                       stage = (Stage) loginbtn.getScene().getWindow();
-                       stage.setScene(new Scene(root, 520, 400));
-                       stage.show();
-                   }
-                } //else if (roleResult.getInt(1) == 1){
-                    //root = FXMLLoader.load(getClass().getResource("StudentView.fxml"));
-                    //stage = (Stage) loginbtn.getScene().getWindow();
-                    //stage.setScene(new Scene(root, 520, 400));
-                    //stage.show();
-                else {
-                    loginmissinglabel.setText("Invalid Login");
+                    //Da außer Admin nur Lehrer loggen kann, öffnet sich die InstructorView Page!
+                    root = FXMLLoader.load(getClass().getResource("InstructorView.fxml"));
+                    stage = (Stage) loginbtn.getScene().getWindow();
+                    stage.setScene(new Scene(root, 520, 400));
+                    stage.show();
+                } else {
+                    loginmissinglabel.setText("Invalid Login!");
                 }
-
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
+    }
 }

@@ -114,6 +114,8 @@ public class SignUpController implements Initializable {
         String price = pricetxtfield.getText();
         String drivingLicense = drivinglicensetxtfield.getText();
 
+
+        //Die Befehle wurden in der "DatabaseConnection" Klasse hinzugefügt.
         String registered = dc.registerStudent(firstname, surname, age, email, phonenumber, gender, price, drivingLicense, username, password);
         try {
             Statement statement = connectDB.createStatement();

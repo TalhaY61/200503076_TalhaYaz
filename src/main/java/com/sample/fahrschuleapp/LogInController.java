@@ -78,7 +78,6 @@ public class LogInController implements Initializable {
         //TODO use the "join" method in sql to combine the tables and
         // get username/ password to get the specific window!!!.
 
-
         String adminLogin = "SELECT count(1) FROM administrator WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
         //String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
         //String getRole = "SELECT * FROM useraccounts WHERE role LIKE '%" + signup.roletxtfield + "%'" ;
@@ -97,7 +96,6 @@ public class LogInController implements Initializable {
                 //wenn das Acc existiert
                 if (/*(queryResult.getInt(1) == 1) ||*/ (queryResultAdmin.getInt(1) == 1)) {
 
-                    //Habe Sign-UP fenster noch nicht hinbekommen. Arbeite dran.
                     //ADMIN LOG IN DATA
                    if (usernametxtfield.getText().equals("admin1967") && passwordtxtfield.getText().equals("imtheadmin2361")) {
                        //Ändere auf Admin wenn admin einloggt.

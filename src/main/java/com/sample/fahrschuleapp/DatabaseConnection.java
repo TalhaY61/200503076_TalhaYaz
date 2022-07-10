@@ -24,10 +24,11 @@ public class DatabaseConnection {
         return databaseLink;
     }
 
+
     public String registerInstructor(String firstname, String surname, String age, String email, String phonenumber, String gender, String salary, String username, String password) {
 
-        String insertFields = "INSERT INTO instructor (FirstName, SurName, Age, Email, Phonenumber, Gender, Salary, Username, Password) VALUES ('";
-        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + salary + "','" + username + "','" + password + "');";
+        String insertFields = "INSERT INTO instructor (FirstName, SurName, Age, Email, Phonenumber, Gender, Salary, Username, Password, Role) VALUES ('";
+        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + salary + "','" + username + "','" + password + "','Instructor');";
         String insertToRegister = insertFields + insertValues;
 
         return insertToRegister;
@@ -35,8 +36,8 @@ public class DatabaseConnection {
 
     public String registerStudent(String firstname, String surname, String age, String email, String phonenumber, String gender, String price, String drivingLicense, String username, String password) {
 
-        String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, Gender, Price, DrivingLicenseType, Username, Password) VALUES ('";
-        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicense + "','" + username + "','" + password + "');";
+        String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, Gender, Price, DrivingLicenseType, Username, Password, Role) VALUES ('";
+        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicense + "','" + username + "','" + password + "','Student');";
         String insertToRegister = insertFields + insertValues;
 
         return insertToRegister;

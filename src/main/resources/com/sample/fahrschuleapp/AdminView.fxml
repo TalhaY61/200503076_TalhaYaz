@@ -71,11 +71,11 @@
    <left>
       <AnchorPane prefHeight="191.0" prefWidth="263.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView layoutX="5.0" layoutY="42.0" prefHeight="172.0" prefWidth="252.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
+            <TableView fx:id="userTabelView" layoutX="5.0" layoutY="42.0" prefHeight="172.0" prefWidth="252.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0">
               <columns>
-                <TableColumn prefWidth="65.0" text="ID" />
-                <TableColumn prefWidth="75.0" text="Surname" />
-                  <TableColumn prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="roleColumn" prefWidth="74.0" text="Role" />
+                <TableColumn fx:id="firstNameColumn" prefWidth="82.0" text="FirstName" />
+                  <TableColumn fx:id="surnameColumn" prefWidth="96.0" text="SurName" />
               </columns>
             </TableView>
             <Label layoutX="5.0" layoutY="11.0" text="Search:" textFill="#0d7c26" AnchorPane.topAnchor="11.0">
@@ -83,7 +83,7 @@
                   <Font name="Times New Roman" size="12.0" />
                </font>
             </Label>
-            <TextField layoutX="47.0" layoutY="9.0" prefHeight="25.0" prefWidth="211.0" promptText="Search for user" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <TextField fx:id="searchTextField" layoutX="47.0" layoutY="9.0" prefHeight="25.0" prefWidth="211.0" promptText="Search for user" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
          </children></AnchorPane>
    </left>
 </BorderPane>

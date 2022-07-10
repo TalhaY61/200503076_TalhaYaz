@@ -1,5 +1,9 @@
 package com.sample.fahrschuleapp;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +11,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AdminController implements Initializable {
 
@@ -26,6 +40,19 @@ public class AdminController implements Initializable {
     @FXML
     private Button addDrivingLessonBtn, viewDrivingLessonBtn;
 
+    @FXML
+    private TableView<UserSearchModel> userTabelView;
+    @FXML
+    private TableColumn<UserSearchModel, String> roleColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> surnameColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> firstNameColumn;
+    @FXML
+    private TextField searchTextField;
+
+    ObservableList<UserSearchModel> userSearchObserverList = FXCollections.observableArrayList();
+
 
     private Stage stage;
     private Scene scene;
@@ -33,7 +60,66 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
 
+        //SQL Query - Execute in the backend Database
+        String userViewQuery = "SELECT Role, FirstName, SurName FROM instructor\n" +
+                "UNION\n" +
+                "SELECT Role, FirstName, SurName FROM student";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(userViewQuery);
+
+            while(queryOutput.next()) {
+
+                String queryID = queryOutput.getString("Role");
+                String queryFirstName = queryOutput.getString("FirstName");
+                String querySurName = queryOutput.getString("SurName");
+
+                //Populate the ObservableList
+                userSearchObserverList.add(new UserSearchModel(queryID, queryFirstName, querySurName));
+            }
+
+            roleColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
+            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
+            surnameColumn.setCellValueFactory(new PropertyValueFactory<>("SurName"));
+
+            userTabelView.setItems(userSearchObserverList);
+
+            /*
+            //Initila filtered List
+            FilteredList<UserSearchModel> filteredData = new FilteredList<>(userSearchObserverList, b -> true);
+
+            searchTextField.textProperty().addListener((observable -> oldValue, newValue) -> {
+                filteredData.setPredicate(userSearchModel -> {
+                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                        return true;
+                    }
+
+                    String searchkeyword = newValue.toLowerCase();
+
+                    if(UserSearchModel.getID().toLowerCase().indexOf(searchTextField)>-1) {
+                        return true;// Means we foundamatch in ProductName
+                    }else if(searchTextField.getFirstName().toLowerCase().indexOf(searchKeyword)
+                        return true;// Means we foundamatch in Description
+                    }else if(UserSearchModel.getSurName().toLowerCase().indexOf(search searchTextField)>-1){
+                        return true;
+                    }else if(product SearchModel.getModel Number().toLowerCase().indexOf(searchKeyword)>-1){
+                        searchTextField
+                    }else if(product SearchModel.getModel Year().toString().indexOf(searchkeyword)>-1){
+                        return true;
+                    }else
+                    return false;// no match found
+                });
+            });
+            */
+
+        } catch (SQLException e) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
+        }
     }
     public void logoutButtonPressed(ActionEvent event) throws IOException {
         //switch zur LogOut Seite zurück.

@@ -34,7 +34,7 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField agetxtfield, pricetxtfield;
     @FXML
-    private TextField emailtxtfield, drivinglicensetxtfield;
+    private TextField emailtxtfield, drivingLicencetxtfield;
     @FXML
     private TextField phonenumbertxtfield, usernametxtfield, gendertxtfield, salarytxtfield;
     @FXML
@@ -114,11 +114,11 @@ public class SignUpController implements Initializable {
         String password = passwordtxtfield.getText();
         String gender = gendertxtfield.getText();
         String price = pricetxtfield.getText();
-        String drivingLicense = drivinglicensetxtfield.getText();
+        String drivingLicence = drivingLicencetxtfield.getText();
 
 
         //Die Befehle wurden in der "DatabaseConnection" Klasse hinzugefügt.
-        String registered = dc.registerStudent(firstname, surname, age, email, phonenumber, gender, price, drivingLicense, username, password);
+        String registered = dc.registerStudent(firstname, surname, age, email, phonenumber, gender, price, drivingLicence, username, password);
         try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(registered);

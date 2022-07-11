@@ -1,6 +1,5 @@
 package com.sample.fahrschuleapp;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,14 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Locale;
+import java.sql.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -39,6 +35,8 @@ public class AdminController implements Initializable {
     @FXML
     private Button addDrivingLessonBtn, viewDrivingLessonBtn;
     @FXML
+    private Button updateInstructor, updateStudent;
+    @FXML
     private Button refreshbtn;
     @FXML
     private Label messageLabel;
@@ -54,9 +52,19 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<UserSearchModel, String> firstNameColumn;
     @FXML
+    private TableColumn<UserSearchModel, String> ageColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> emailColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> phonenumberColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> passwordColumn;
+    @FXML
     private TextField searchTextField;
 
     ObservableList<UserSearchModel> userSearchObserverList = FXCollections.observableArrayList();
+    UserSearchModel user = null;
+
 
     DatabaseConnection connectNow = new DatabaseConnection();
 
@@ -70,9 +78,9 @@ public class AdminController implements Initializable {
         Connection connectDB = connectNow.getConnection();
 
         //SQL Query - Execute in the backend Database
-        String userViewQuery = "SELECT Role, Username, FirstName, SurName FROM instructor\n" +
+        String userViewQuery = "SELECT Role, FirstName, SurName, Age, Email, Phonenumber, Username, Password FROM instructor\n" +
                 "UNION\n" +
-                "SELECT Role, Username, FirstName, SurName FROM student";
+                "SELECT Role, FirstName, SurName, Age, Email, Phonenumber, Username, Password FROM student";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -81,18 +89,26 @@ public class AdminController implements Initializable {
             while(queryOutput.next()) {
 
                 String queryRole = queryOutput.getString("Role");
-                String queryUsername = queryOutput.getString("Username");
                 String queryFirstName = queryOutput.getString("FirstName");
                 String querySurName = queryOutput.getString("SurName");
-
+                String queryAge = queryOutput.getString("Age");
+                String queryEmail = queryOutput.getString("Email");
+                String queryPhonenumber = queryOutput.getString("Phonenumber");
+                String queryUsername = queryOutput.getString("Username");
+                String queryPassword = queryOutput.getString("Password");
                 //Populate the ObservableList
-                userSearchObserverList.add(new UserSearchModel(queryRole, queryUsername, queryFirstName, querySurName));
+                userSearchObserverList.add(new UserSearchModel(queryRole, queryFirstName, querySurName, queryAge, queryEmail,
+                        queryPhonenumber, queryUsername, queryPassword));
             }
 
             roleColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
-            usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
             firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
             surnameColumn.setCellValueFactory(new PropertyValueFactory<>("SurName"));
+            ageColumn.setCellValueFactory(new PropertyValueFactory<>("Age"));
+            emailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+            phonenumberColumn.setCellValueFactory(new PropertyValueFactory<>("Phonenumber"));
+            usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
+            passwordColumn.setCellValueFactory(new PropertyValueFactory<>("Password"));
 
             userTabelView.setItems(userSearchObserverList);
             userTabelView.refresh();
@@ -113,11 +129,19 @@ public class AdminController implements Initializable {
 
                     if (userSearchModel.getRole().toLowerCase().indexOf(searchKeyword) > -1)
                         return true; //means no found a match in Role
-                    else if (userSearchModel.getUsername().toLowerCase().indexOf(searchKeyword) > -1)
-                        return true; //means no found a match in Username
                     else if (userSearchModel.getFirstName().toLowerCase().indexOf(searchKeyword) > -1)
                         return true; //means no found a match in FirstName
                     else if (userSearchModel.getSurName().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true;
+                    else if (userSearchModel.getAge().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true;
+                    else if (userSearchModel.getEmail().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true;
+                    else if (userSearchModel.getPhonenumber().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true;
+                    else if (userSearchModel.getUsername().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true; //means no found a match in Username
+                    else if (userSearchModel.getPassword().toLowerCase().indexOf(searchKeyword) > -1)
                         return true;
                     else
                         return false; //no match found.
@@ -208,8 +232,29 @@ public class AdminController implements Initializable {
         stage.show();
     }
 
-    public void updateInstructorButtonPressed() {
+    public void updateInstructorButtonPressed() throws IOException {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
 
+        user = userTabelView.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader ();
+        loader.setLocation(getClass().getResource("InstructorView.fxml"));
+        try {
+            loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        InstructorController instructorController = loader.getController();
+        instructorController.setTextField(user.getFirstName(), user.getSurName(),
+                user.getAge(),user.getEmail(), user.getPhonenumber(),
+                user.getUsername(), user.getPassword());
+
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.initStyle(StageStyle.UTILITY);
+        stage.show();
     }
 
     public void updateStudentButtonPressed() {

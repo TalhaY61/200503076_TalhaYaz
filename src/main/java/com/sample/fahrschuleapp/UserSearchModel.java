@@ -1,16 +1,30 @@
 package com.sample.fahrschuleapp;
 
+import javafx.scene.control.PasswordField;
+
 public class UserSearchModel {
 
-    String Role, Username;
-    String FirstName, SurName;
+    String Role, Username, Password;
+    String FirstName, SurName, Age, Email, Phonenumber;
+    String DrivingLicenceType;
 
 
-    public UserSearchModel(String Role, String Username, String FirstName, String SurName) {
+    public UserSearchModel(String Role, String FirstName, String SurName,String Age, String Email, String Phonenumber, String Username,
+                           String Password) {
         this.Role = Role;
         this.Username = Username;
         this.FirstName = FirstName;
         this.SurName = SurName;
+        this.Age = Age;
+        this.Email = Email;
+        this.Phonenumber = Phonenumber;
+        this.Password = Password;
+    }
+
+    public UserSearchModel(String FirstName, String SurName, String DrivingLicenceType) {
+        this.FirstName = FirstName;
+        this.SurName = SurName;
+        this.DrivingLicenceType = DrivingLicenceType;
     }
 
 
@@ -44,5 +58,41 @@ public class UserSearchModel {
 
     public void setSurName(String SurName) {
         SurName = SurName;
+    }
+
+    public String getDrivingLicenceType() { return DrivingLicenceType;}
+
+    public void setDrivingLicenceType(String DrivingLicenceType) {this.DrivingLicenceType = DrivingLicenceType;}
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getAge() {
+        return Age;
+    }
+
+    public void setAge(String age) {
+        Age = age;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getPhonenumber() {
+        return Phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        Phonenumber = phonenumber;
     }
 }

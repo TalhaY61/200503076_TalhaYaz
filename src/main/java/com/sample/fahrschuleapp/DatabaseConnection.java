@@ -45,11 +45,11 @@ public class DatabaseConnection {
     }
 
     public String registerStudent(String firstname, String surname, String age, String email, String phonenumber,
-                                  String gender, String price, String drivingLicense, String username, String password) {
+                                  String gender, String price, String drivingLicence, String username, String password) {
 
         String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, " +
-                "Gender, Price, DrivingLicenseType, Username, Password, Role) VALUES ('";
-        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicense + "','" + username + "','" + password + "','Student');";
+                "Gender, Price, DrivingLicenceType, Username, Password, Role) VALUES ('";
+        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicence + "','" + username + "','" + password + "','Student');";
         String insertToRegister = insertFields + insertValues;
 
         return insertToRegister;
@@ -65,7 +65,7 @@ public class DatabaseConnection {
 
         String updateFields = "UPDATE Instructor SET FirstName = '" + firstname + " ', SurName = '" + surname + " ', " +
                 "Age = '" + age +" ', Email = '" + email + " ', Phonenumber = ' " + phonenumber + " '," +
-                " Gender = ' " + gender + " ', Username = ' " + username + " ', Password = ' " + password +" ';";
+                " Gender = ' " + gender + " ', Username = ' " + username + " ', Password = ' " + password +" ' WHERE username = '" + username+ " ';";
 
         return updateFields;
     }

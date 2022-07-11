@@ -24,8 +24,18 @@ public class DatabaseConnection {
         return databaseLink;
     }
 
+    /*
+    public String getInstructorData() {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
 
-    public String registerInstructor(String firstname, String surname, String age, String email, String phonenumber, String gender, String salary, String username, String password) {
+        String getFields = "SELECT * FROM Instructor";
+        return getFields;
+    } */
+
+
+    public String registerInstructor(String firstname, String surname, String age, String email,
+                                     String phonenumber, String gender, String salary, String username, String password) {
 
         String insertFields = "INSERT INTO instructor (FirstName, SurName, Age, Email, Phonenumber, Gender, Salary, Username, Password, Role) VALUES ('";
         String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + salary + "','" + username + "','" + password + "','Instructor');";
@@ -34,9 +44,11 @@ public class DatabaseConnection {
         return insertToRegister;
     }
 
-    public String registerStudent(String firstname, String surname, String age, String email, String phonenumber, String gender, String price, String drivingLicense, String username, String password) {
+    public String registerStudent(String firstname, String surname, String age, String email, String phonenumber,
+                                  String gender, String price, String drivingLicense, String username, String password) {
 
-        String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, Gender, Price, DrivingLicenseType, Username, Password, Role) VALUES ('";
+        String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, " +
+                "Gender, Price, DrivingLicenseType, Username, Password, Role) VALUES ('";
         String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicense + "','" + username + "','" + password + "','Student');";
         String insertToRegister = insertFields + insertValues;
 
@@ -46,5 +58,15 @@ public class DatabaseConnection {
     public void deleteInstructor() {
 
 
+    }
+
+    public String updateInstructor(String firstname, String surname, String age, String email, String phonenumber,
+                                   String gender, String username, String password) {
+
+        String updateFields = "UPDATE Instructor SET FirstName = '" + firstname + " ', SurName = '" + surname + " ', " +
+                "Age = '" + age +" ', Email = '" + email + " ', Phonenumber = ' " + phonenumber + " '," +
+                " Gender = ' " + gender + " ', Username = ' " + username + " ', Password = ' " + password +" ';";
+
+        return updateFields;
     }
 }

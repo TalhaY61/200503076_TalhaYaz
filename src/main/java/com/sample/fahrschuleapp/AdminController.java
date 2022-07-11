@@ -4,6 +4,7 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -95,33 +97,39 @@ public class AdminController implements Initializable {
             userTabelView.setItems(userSearchObserverList);
             userTabelView.refresh();
 
-            /*
+
             //Initila filtered List
             FilteredList<UserSearchModel> filteredData = new FilteredList<>(userSearchObserverList, b -> true);
 
-            searchTextField.textProperty().addListener((observable -> oldValue, newValue) -> {
+            searchTextField.textProperty().addListener((observable,oldValue, newValue) ->  {
                 filteredData.setPredicate(userSearchModel -> {
+
+                    //If no match value then display all record or whatever records it current have, no changes
                     if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
                         return true;
                     }
 
-                    String searchkeyword = newValue.toLowerCase();
+                    String searchKeyword = newValue.toLowerCase();
 
-                    if(UserSearchModel.getID().toLowerCase().indexOf(searchTextField)>-1) {
-                        return true;// Means we foundamatch in ProductName
-                    }else if(searchTextField.getFirstName().toLowerCase().indexOf(searchKeyword)
-                        return true;// Means we foundamatch in Description
-                    }else if(UserSearchModel.getSurName().toLowerCase().indexOf(search searchTextField)>-1){
+                    if (userSearchModel.getRole().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true; //means no found a match in Role
+                    else if (userSearchModel.getUsername().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true; //means no found a match in Username
+                    else if (userSearchModel.getFirstName().toLowerCase().indexOf(searchKeyword) > -1)
+                        return true; //means no found a match in FirstName
+                    else if (userSearchModel.getSurName().toLowerCase().indexOf(searchKeyword) > -1)
                         return true;
-                    }else if(product SearchModel.getModel Number().toLowerCase().indexOf(searchKeyword)>-1){
-                        searchTextField
-                    }else if(product SearchModel.getModel Year().toString().indexOf(searchkeyword)>-1){
-                        return true;
-                    }else
-                    return false;// no match found
+                    else
+                        return false; //no match found.
                 });
             });
-            */
+
+            //Bind sorted result with table view
+            SortedList<UserSearchModel> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(userTabelView.comparatorProperty());
+
+            //Appy filtered and sorted data to the table view
+            userTabelView.setItems(sortedData);
 
         } catch (SQLException e) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, e);
@@ -161,6 +169,7 @@ public class AdminController implements Initializable {
             Connection connectDB = connectNow.getConnection();
             String name = userTabelView.getSelectionModel().getSelectedItem().getFirstName();
 
+
             String deleteUser = "DELETE FROM Student WHERE FirstName = '" + name + "';";
             try {
                 Statement statement = connectDB.createStatement();
@@ -170,6 +179,7 @@ public class AdminController implements Initializable {
                 e.printStackTrace();
                 e.getCause();
             }
+
         } else if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Instructor")) {
             DatabaseConnection connectNow = new DatabaseConnection();
             Connection connectDB = connectNow.getConnection();
@@ -187,23 +197,27 @@ public class AdminController implements Initializable {
         }else {
             messageLabel.setText("Error! Could not delete the selected User. Try Again!");
         }
+
     }
 
-    // TODO Refresh Button für TableView funktioniert nicht!
-    public void refreshButtonPressed(ActionEvent event) {
-        userTabelView.refresh();
+    public void refreshButtonPressed(ActionEvent event) throws IOException {
+        //Statt die refresh funktion zu benutzen, loade ich einfach die AdminView Szene von neu!
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
+        stage = (Stage) refreshbtn.getScene().getWindow();
+        stage.setScene(new Scene(root, 520, 400));
+        stage.show();
     }
 
     public void updateInstructorButtonPressed() {
 
     }
+
     public void updateStudentButtonPressed() {
 
     }
     public void viewDrivingLessonButtonPressed(ActionEvent event) {
         //Das ansehen der Fahrstunden der Schüler in einer Art Kalender vlt
     }
-
 
     public void addDrivingLessonButtonPressed (ActionEvent event) {
         //Das hinzufügen von Fahrstunden für die Schüler, für neu

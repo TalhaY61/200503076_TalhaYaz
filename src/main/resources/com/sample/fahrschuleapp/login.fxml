@@ -56,7 +56,7 @@
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Text>
-            <Button fx:id="cancelbtn" layoutX="312.0" layoutY="132.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Cancel" textFill="#e5debf" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="exitButton" layoutX="312.0" layoutY="132.0" mnemonicParsing="false" onAction="#exitButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Exit" textFill="#e5debf" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>

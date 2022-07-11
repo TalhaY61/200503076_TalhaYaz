@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import com.sample.fahrschuleapp.SignUpController;
 
@@ -29,7 +30,7 @@ public class LogInController implements Initializable {
     private Button loginbtn;
 
     @FXML
-    private Button cancelbtn;
+    private Button exitButton;
 
     @FXML
     private Label loginmissinglabel;
@@ -62,8 +63,8 @@ public class LogInController implements Initializable {
     }
 
     @FXML
-    protected void cancelButtonOnAction(ActionEvent event) {
-        Stage stage = (Stage) cancelbtn.getScene().getWindow();
+    protected void exitButtonOnAction(ActionEvent event) {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
 
@@ -92,7 +93,7 @@ public class LogInController implements Initializable {
                 if ((queryResult.getInt(1) == 1)) {
 
                     //Da außer Admin nur Lehrer loggen kann, öffnet sich die InstructorView Page!
-                    root = FXMLLoader.load(getClass().getResource("InstructorView.fxml"));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("InstructorView.fxml")));
                     stage = (Stage) loginbtn.getScene().getWindow();
                     stage.setScene(new Scene(root, 520, 400));
                     stage.show();

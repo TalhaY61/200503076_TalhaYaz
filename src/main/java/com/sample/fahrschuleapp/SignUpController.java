@@ -62,15 +62,11 @@ public class SignUpController implements Initializable {
     public void registerButtonInstructorPressed(ActionEvent event) throws IOException {
         registerInstructor();
     }
-    public void deleteButtonOnAction(ActionEvent event) throws IOException {
-        deleteUser();
-    }
     public void registerButtonStudentPressed(ActionEvent event) throws IOException {
         registerStudent();
     }
 
     public void registerInstructor(){
-
         //TODO Das Gehalt muss mehr als 4200TRY sein kontrolliere diesen.
         //Verknüpft die MySQL und hier wird dann der USER REGISTRIERT.
         DatabaseConnection connectNow = new DatabaseConnection();
@@ -86,7 +82,6 @@ public class SignUpController implements Initializable {
         String gender = gendertxtfield.getText();
         String salary = salarytxtfield.getText();
 
-
         String registered = dc.registerInstructor(firstname, surname, age, email, phonenumber, gender, salary, username, password);
 
         try {
@@ -94,7 +89,7 @@ public class SignUpController implements Initializable {
             statement.executeUpdate(registered);
             registertxtlabel.setText("Instructor has been registered!");
             //After Registered change scene to AdminView.
-            root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
             stage = (Stage) registerbtn.getScene().getWindow();
             stage.setScene(new Scene(root, 520, 400));
             stage.show();
@@ -130,7 +125,7 @@ public class SignUpController implements Initializable {
             registertxtlabel.setText("Student has been registered!");
 
             //After Registered change scene to AdminView.
-            root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
             stage = (Stage) registerbtn.getScene().getWindow();
             stage.setScene(new Scene(root, 520, 400));
             stage.show();
@@ -139,20 +134,4 @@ public class SignUpController implements Initializable {
             e.getCause();
         }
     }
-
-    //FIXME Problem beim löschen des schülers oder lehrers (15.05, 22:07)
-    // Es wird wahrscheinlich eine "JOIN" verknüpfung gebraucht. Look SQL
-    // bozduk bunu kankss
-
-
-    public void deleteUser() {
-
-        //TODO Zeige eine kleine Tabelle wo die Schüler stehen
-        // mit den zugehörigen Lehrern und das nächst stehende Fahrtermin.
-
-    }
-
-
-
-
 }

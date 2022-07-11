@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #E5DEBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.fahrschuleapp.AdminController">
+   <top>
+      <AnchorPane prefHeight="75.0" prefWidth="349.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="14.0" layoutY="12.0" prefHeight="18.0" prefWidth="65.0" text="Logged in as," textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="13.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="11.0" />
+               </font>
+            </Label>
+            <Label layoutX="79.0" layoutY="14.0" prefHeight="14.0" prefWidth="92.0" text="Administrator" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="logoutbtn" alignment="CENTER" layoutX="15.0" layoutY="38.0" mnemonicParsing="false" onAction="#logoutButtonPressed" prefHeight="17.0" prefWidth="143.0" style="-fx-background-color: #0D7C26;" text="Logout" textFill="#e5debf" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="35.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="10.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="310.0" prefWidth="276.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="userTabelView" layoutX="5.0" layoutY="32.0" prefHeight="182.0" prefWidth="271.0" AnchorPane.bottomAnchor="113.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+              <columns>
+                <TableColumn fx:id="roleColumn" prefWidth="60.0" text="Role" />
+                <TableColumn fx:id="usernameColumn" prefWidth="70.0" text="Username" />
+                  <TableColumn fx:id="firstNameColumn" prefWidth="70.0" text="FirstName" />
+                  <TableColumn fx:id="surnameColumn" prefWidth="75.0" text="SurName" />
+              </columns>
+            </TableView>
+            <TextField fx:id="searchTextField" layoutX="47.0" layoutY="9.0" prefHeight="25.0" prefWidth="199.0" promptText="Search for user" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="refreshbtn" alignment="CENTER" layoutX="216.0" layoutY="4.0" mnemonicParsing="false" onAction="#refreshButtonPressed" prefHeight="22.0" prefWidth="66.0" style="-fx-background-color: #0D7C26;" text="Refresh" textFill="#e5debf" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="202.0" prefWidth="242.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="85.0" text="Operations" textFill="#0d7c26" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="15.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" layoutX="124.0" layoutY="188.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Delete Drivin L." textFill="#e5debf" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="6.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteUserBtn" alignment="CENTER" layoutX="12.0" layoutY="56.0" mnemonicParsing="false" onAction="#deleteUserButtonPressed" prefHeight="22.0" prefWidth="220.0" style="-fx-background-color: #0D7C26;" text="Delete Instructor/ Student" textFill="#e5debf" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="registerStudent" alignment="CENTER" layoutX="124.0" layoutY="27.0" mnemonicParsing="false" onAction="#registerStudentButtonPressed" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Add Student" textFill="#e5debf" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="registerInstructor" alignment="CENTER" layoutX="12.0" layoutY="27.0" mnemonicParsing="false" onAction="#registerInstructorButtonPressed" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Add Instructor" textFill="#e5debf" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" layoutX="13.0" layoutY="188.0" mnemonicParsing="false" onAction="#viewDrivingLessonButtonPressed" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Add Driving L." textFill="#e5debf">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="updateStudent" alignment="CENTER" layoutX="124.0" layoutY="88.0" mnemonicParsing="false" onAction="#updateStudentButtonPressed" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Update Student" textFill="#e5debf" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="updateInstructor" alignment="CENTER" layoutX="6.0" layoutY="88.0" mnemonicParsing="false" onAction="#updateInstructorButtonPressed" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Update Instructor" textFill="#e5debf" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

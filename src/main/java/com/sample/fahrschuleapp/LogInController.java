@@ -81,7 +81,7 @@ public class LogInController implements Initializable {
             stage.show();
         }
 
-        String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "' AND password = '" + passwordtxtfield.getText() + "'";
+        String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "';";
 
         try {
             Statement statement = connectDB.createStatement();

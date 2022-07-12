@@ -45,27 +45,32 @@ public class DatabaseConnection {
     }
 
     public String registerStudent(String firstname, String surname, String age, String email, String phonenumber,
-                                  String gender, String price, String drivingLicence, String username, String password) {
+                                  String gender, String price, String drivingLicence, String username, String password, String InfoInstructor) {
 
         String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, " +
-                "Gender, Price, DrivingLicenceType, Username, Password, Role) VALUES ('";
-        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicence + "','" + username + "','" + password + "','Student');";
+                "Gender, Price, DrivingLicenceType, Username, Password, Role, InfoInstructor) VALUES ('";
+        String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicence + "','" + username + "','" + password + "','Student', '" + InfoInstructor + "');";
         String insertToRegister = insertFields + insertValues;
 
         return insertToRegister;
     }
 
-    public void deleteInstructor() {
+    public String updateInstructor(String firstname, String surname, String age, String email, String phonenumber,
+                                    String username, String password) {
 
 
+        String updateFields = "UPDATE Instructor SET FirstName = '"+ firstname +" ', SurName = '"+ surname +" ', Age = '"+ age
+                +"', Email = '"+ email +" ', Phonenumber = '"+ phonenumber +"', Password = ' " + password + " ' WHERE username = '" + username+"';\n";
+
+        return updateFields;
     }
 
-    public String updateInstructor(String firstname, String surname, String age, String email, String phonenumber,
-                                   String gender, String username, String password) {
+    public String updateStudent(String firstname, String surname, String age, String email, String phonenumber,
+                                   String username, String password) {
 
-        String updateFields = "UPDATE Instructor SET FirstName = '" + firstname + " ', SurName = '" + surname + " ', " +
-                "Age = '" + age +" ', Email = '" + email + " ', Phonenumber = ' " + phonenumber + " '," +
-                " Gender = ' " + gender + " ', Username = ' " + username + " ', Password = ' " + password +" ' WHERE username = '" + username+ " ';";
+
+        String updateFields = "UPDATE Student SET FirstName = '"+ firstname +" ', SurName = '"+ surname +" ', Age = '"+ age
+                +"', Email = '"+ email +" ', Phonenumber = '"+ phonenumber +"', Password = ' " + password + " ' WHERE username = '" + username+"';\n";
 
         return updateFields;
     }

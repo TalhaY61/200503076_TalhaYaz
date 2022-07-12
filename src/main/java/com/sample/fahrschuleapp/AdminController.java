@@ -35,7 +35,7 @@ public class AdminController implements Initializable {
     @FXML
     private Button addDrivingLessonBtn, viewDrivingLessonBtn;
     @FXML
-    private Button updateInstructor, updateStudent;
+    private Button updateStudent, updateInstructor;
     @FXML
     private Button refreshbtn;
     @FXML
@@ -238,16 +238,16 @@ public class AdminController implements Initializable {
 
         user = userTabelView.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader ();
-        loader.setLocation(getClass().getResource("InstructorView.fxml"));
+        loader.setLocation(getClass().getResource("UpdateInstructorPage.fxml"));
         try {
             loader.load();
         } catch (IOException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        InstructorController instructorController = loader.getController();
-        instructorController.setTextField(user.getFirstName(), user.getSurName(),
-                user.getAge(),user.getEmail(), user.getPhonenumber(),
+        SignUpController signUpController = loader.getController();
+        signUpController.setTextField(user.getFirstName(), user.getSurName(),
+                 user.getEmail(),user.getAge(), user.getPhonenumber(),
                 user.getUsername(), user.getPassword());
 
         Parent parent = loader.getRoot();
@@ -257,9 +257,32 @@ public class AdminController implements Initializable {
         stage.show();
     }
 
-    public void updateStudentButtonPressed() {
 
+    public void updateStudentButtonPressed() throws IOException {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        user = userTabelView.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader ();
+        loader.setLocation(getClass().getResource("UpdateStudentPage.fxml"));
+        try {
+            loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        SignUpController signUpController = loader.getController();
+        signUpController.setTextField(user.getFirstName(), user.getSurName(),
+                user.getEmail(),user.getAge(), user.getPhonenumber(),
+                user.getUsername(), user.getPassword());
+
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.initStyle(StageStyle.UTILITY);
+        stage.show();
     }
+
     public void viewDrivingLessonButtonPressed(ActionEvent event) {
         //Das ansehen der Fahrstunden der Schüler in einer Art Kalender vlt
     }

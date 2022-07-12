@@ -40,7 +40,7 @@
                   <TableColumn fx:id="firstNameColumn" prefWidth="70.0" text="FirstName" />
                   <TableColumn fx:id="surnameColumn" prefWidth="75.0" text="SurName" />
                   <TableColumn fx:id="ageColumn" prefWidth="75.0" text="Age" />
-                  <TableColumn fx:id="emailColumn" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="emailColumn" prefWidth="75.0" text="E-Mail" />
                   <TableColumn fx:id="phonenumberColumn" prefWidth="75.0" text="Phonenumber" />
                 <TableColumn fx:id="usernameColumn" prefWidth="70.0" text="Username" />
                   <TableColumn fx:id="passwordColumn" prefWidth="75.0" text="Password" />

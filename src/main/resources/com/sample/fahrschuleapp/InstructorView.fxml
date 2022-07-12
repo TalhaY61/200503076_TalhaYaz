@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -31,96 +30,34 @@
          </children>
       </AnchorPane>
    </top>
-   <left>
-      <AnchorPane prefHeight="325.0" prefWidth="299.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="70.0" layoutY="5.0" prefHeight="18.0" prefWidth="160.0" text="Instructor Information" textFill="#0d7c26" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="32.0" prefHeight="18.0" prefWidth="87.0" text="Name, Surname:" textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="30.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="60.0" prefHeight="18.0" prefWidth="65.0" text="Age:" textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="60.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="91.0" prefHeight="18.0" prefWidth="85.0" text="E-Mail Adress:" textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="90.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="109.0" prefHeight="18.0" prefWidth="82.0" text="Phonenumber:" textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="120.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="136.0" prefHeight="18.0" prefWidth="65.0" text="Gender" textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="163.0" prefHeight="18.0" prefWidth="65.0" text="Username:" textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="180.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="191.0" prefHeight="18.0" prefWidth="65.0" text="Password:" textFill="#0d7c26" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="210.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Label>
-            <Button fx:id="applyButton" alignment="CENTER" layoutX="142.0" layoutY="250.0" mnemonicParsing="false" onAction="#applyButtonPressed" prefHeight="17.0" prefWidth="149.0" style="-fx-background-color: #0D7C26;" text="Apply changes" textFill="#e5debf">
-               <font>
-                  <Font name="Times New Roman Bold" size="10.0" />
-               </font>
-            </Button>
-            <TextField fx:id="firstnametxtfield" layoutX="101.0" layoutY="29.0" prefHeight="25.0" prefWidth="97.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="102.0" AnchorPane.topAnchor="30.0" />
-            <TextField fx:id="agetxtfield" layoutX="101.0" layoutY="57.0" prefHeight="25.0" prefWidth="186.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0" />
-            <TextField fx:id="surnametxtfield" layoutX="215.0" layoutY="30.0" prefHeight="25.0" prefWidth="94.0" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0" />
-            <TextField fx:id="phonenumbertxtfield" layoutX="101.0" layoutY="117.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="120.0" />
-            <TextField fx:id="gendertxtfield" layoutX="101.0" layoutY="146.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0" />
-            <TextField fx:id="usernametxtfield" layoutX="101.0" layoutY="173.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="180.0" />
-            <TextField fx:id="passwordtxtfield" layoutX="101.0" layoutY="201.0" prefHeight="18.0" prefWidth="150.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="210.0" />
-            <TextField fx:id="emailtxtfield" layoutX="101.0" layoutY="88.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="90.0" />
-            <Label fx:id="messageLabel" layoutX="101.0" layoutY="278.0" prefHeight="14.0" prefWidth="192.0" textFill="#0d7c26" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="5.0">
-               <font>
-                  <Font name="Times New Roman" size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-   </left>
    <right>
-      <AnchorPane prefHeight="325.0" prefWidth="220.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="325.0" prefWidth="520.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="studentTableView" layoutX="3.0" layoutY="29.0" prefHeight="175.0" prefWidth="220.0" AnchorPane.bottomAnchor="121.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="29.0">
+            <TableView fx:id="studentTableView" layoutX="94.0" layoutY="29.0" prefHeight="175.0" prefWidth="361.0" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="29.0">
               <columns>
                 <TableColumn fx:id="firstNameColumn" prefWidth="65.0" text="FirstName" />
                 <TableColumn fx:id="surNameColumn" prefWidth="57.0" text="SurName" />
-                  <TableColumn fx:id="drivingLicenceColumn" prefWidth="103.0" text="DrivingLicenceType" />
+                  <TableColumn fx:id="drivingLicenceColumn" prefWidth="128.0" text="DrivingLicenceType" />
+                  <TableColumn fx:id="ageColumn" prefWidth="42.0" text="Age" />
+                  <TableColumn fx:id="emailColumn" prefWidth="127.0" text="Email" />
               </columns>
             </TableView>
-            <Label layoutX="3.0" layoutY="215.0" prefHeight="18.0" prefWidth="90.0" text="following Exam:" textFill="#0d7c26" AnchorPane.leftAnchor="3.0">
+            <Label layoutX="279.0" layoutY="217.0" prefHeight="18.0" prefWidth="90.0" text="following Exams:" textFill="#0d7c26" AnchorPane.leftAnchor="279.0">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="100.0" layoutY="215.0" prefHeight="18.0" prefWidth="90.0" text="- 30.07.2022" textFill="#0d7c26">
+            <Label layoutX="376.0" layoutY="217.0" prefHeight="18.0" prefWidth="64.0" text="- 30.07.2022" textFill="#0d7c26">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="100.0" layoutY="233.0" prefHeight="18.0" prefWidth="90.0" text="- 27.08.2022" textFill="#0d7c26">
+            <Label layoutX="376.0" layoutY="235.0" prefHeight="18.0" prefWidth="63.0" text="- 27.08.2022" textFill="#0d7c26">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="5.0" prefHeight="18.0" prefWidth="215.0" text="Your Students' Information" textFill="#0d7c26" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+            <Label layoutX="168.0" layoutY="5.0" prefHeight="18.0" prefWidth="184.0" text="Your Students' Information" textFill="#0d7c26" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="5.0">
                <font>
                   <Font name="Times New Roman Bold" size="15.0" />
                </font>

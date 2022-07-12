@@ -21,10 +21,12 @@ public class UserSearchModel {
         this.Password = Password;
     }
 
-    public UserSearchModel(String FirstName, String SurName, String DrivingLicenceType) {
+    public UserSearchModel(String FirstName, String SurName, String DrivingLicenceType, String Age, String Email) {
         this.FirstName = FirstName;
         this.SurName = SurName;
         this.DrivingLicenceType = DrivingLicenceType;
+        this.Age = Age;
+        this.Email = Email;
     }
 
 

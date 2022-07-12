@@ -29,13 +29,7 @@ import java.util.logging.Logger;
 public class InstructorController implements Initializable {
 
     @FXML
-    private Button applyButton;
-    @FXML
     private Button logoutbtn;
-    @FXML
-    private TextField firstnametxtfield, surnametxtfield, agetxtfield, emailtxtfield;
-    @FXML
-    private TextField phonenumbertxtfield, gendertxtfield, usernametxtfield, passwordtxtfield;
     @FXML
     private Label messageLabel;
 
@@ -47,6 +41,10 @@ public class InstructorController implements Initializable {
     private TableColumn<UserSearchModel, String> surNameColumn;
     @FXML
     private TableColumn<UserSearchModel, String> drivingLicenceColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> ageColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> emailColumn;
 
     ObservableList<UserSearchModel> studentSearchModel = FXCollections.observableArrayList();
 
@@ -63,7 +61,7 @@ public class InstructorController implements Initializable {
         Connection connectDB = connectNow.getConnection();
 
         //SQL Query - Execute in the backend Database
-        String userViewQuery = "SELECT FirstName, SurName, DrivingLicenceType FROM student";
+        String userViewQuery = "SELECT FirstName, SurName, DrivingLicenceType, Age, Email FROM student";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -74,14 +72,19 @@ public class InstructorController implements Initializable {
                 String queryFirstName = queryOutput.getString("FirstName");
                 String querySurName = queryOutput.getString("SurName");
                 String queryDrivingLicence = queryOutput.getString("DrivingLicenceType");
+                String queryAge = queryOutput.getString("Age");
+                String queryEmail = queryOutput.getString("Email");
 
                 //Populate the ObservableList
-                studentSearchModel.add(new UserSearchModel(queryFirstName, querySurName, queryDrivingLicence));
+                studentSearchModel.add(new UserSearchModel(queryFirstName, querySurName, queryDrivingLicence, queryAge, queryEmail));
             }
 
             firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
             surNameColumn.setCellValueFactory(new PropertyValueFactory<>("SurName"));
             drivingLicenceColumn.setCellValueFactory(new PropertyValueFactory<>("DrivingLicenceType"));
+            ageColumn.setCellValueFactory(new PropertyValueFactory<>("Age"));
+            emailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+
 
             studentTableView.setItems(studentSearchModel);
             studentTableView.refresh();
@@ -101,44 +104,5 @@ public class InstructorController implements Initializable {
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }
-
-    public void applyButtonPressed(ActionEvent event) throws IOException {
-        Connection connectDB = connectNow.getConnection();
-
-        String firstname = firstnametxtfield.getText();
-        String surname = surnametxtfield.getText();
-        String age = agetxtfield.getText();
-        String email = emailtxtfield.getText();
-        String phonenumber = phonenumbertxtfield.getText();
-        String gender = gendertxtfield.getText();
-        String username = usernametxtfield.getText();
-        String password = passwordtxtfield.getText();
-
-        String updated = connectNow.updateInstructor(firstname, surname, age, email, phonenumber, gender, username, password);
-        try {
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(updated);
-            messageLabel.setText("Updated Information successfully");
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-            messageLabel.setText("Update Error");
-        }
-    }
-
-    void setTextField(String firstName, String surName, String email, String age,
-                      String phonenumber, String username, String password) {
-
-
-        firstnametxtfield.setText(firstName);
-        surnametxtfield.setText(surName);
-        emailtxtfield.setText(email);
-        agetxtfield.setText(age);
-        phonenumbertxtfield.setText(phonenumber);
-        usernametxtfield.setText(username);
-        passwordtxtfield.setText(password);
-
-    }
-
 
 }

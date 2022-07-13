@@ -20,7 +20,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.sample.fahrschuleapp.SignUpController;
+import javafx.stage.StageStyle;
 
 import javax.xml.transform.Result;
 
@@ -54,7 +58,6 @@ public class LogInController implements Initializable {
     }
 
     public void loginButtonOnAction(ActionEvent event) throws IOException {
-
         if ((usernametxtfield.getText().isBlank() == false) && passwordtxtfield.getText().isBlank() == false) {
             validateLogin();
         } else {
@@ -62,6 +65,7 @@ public class LogInController implements Initializable {
         }
     }
 
+    //Close the Window and the Program.
     @FXML
     protected void exitButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
@@ -72,7 +76,7 @@ public class LogInController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        //Wenn Admin einloggt.
+        //If the Login Datas are these, then ADMIN can log in.
         if (usernametxtfield.getText().equals("root") && passwordtxtfield.getText().equals("2361")) {
             //Ändere auf Admin wenn admin einloggt.
             root = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
@@ -82,21 +86,19 @@ public class LogInController implements Initializable {
         }
 
         String verifyLogin = "SELECT count(1) FROM instructor WHERE username = '" + usernametxtfield.getText() + "';";
-
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
 
             while (queryResult.next()) {
-
-                //wenn der User existiert
+                //If the username matches the username in the SQL Workbench.
                 if ((queryResult.getInt(1) == 1)) {
-
-                    //Da außer Admin nur Lehrer loggen kann, öffnet sich die InstructorView Page!
+                    //Open instructorView
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("InstructorView.fxml")));
                     stage = (Stage) loginbtn.getScene().getWindow();
                     stage.setScene(new Scene(root, 520, 400));
                     stage.show();
+
                 } else {
                     loginmissinglabel.setText("Invalid Login!");
                 }
@@ -106,4 +108,5 @@ public class LogInController implements Initializable {
         }
 
     }
+
 }

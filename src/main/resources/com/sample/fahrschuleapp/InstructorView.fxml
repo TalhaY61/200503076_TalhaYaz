@@ -36,23 +36,24 @@
             <TableView fx:id="studentTableView" layoutX="94.0" layoutY="29.0" prefHeight="175.0" prefWidth="361.0" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="29.0">
               <columns>
                 <TableColumn fx:id="firstNameColumn" prefWidth="65.0" text="FirstName" />
-                <TableColumn fx:id="surNameColumn" prefWidth="57.0" text="SurName" />
-                  <TableColumn fx:id="drivingLicenceColumn" prefWidth="128.0" text="DrivingLicenceType" />
-                  <TableColumn fx:id="ageColumn" prefWidth="42.0" text="Age" />
-                  <TableColumn fx:id="emailColumn" prefWidth="127.0" text="Email" />
+                <TableColumn fx:id="surNameColumn" prefWidth="64.0" text="SurName" />
+                  <TableColumn fx:id="ageColumn" prefWidth="32.0" text="Age" />
+                  <TableColumn fx:id="emailColumn" prefWidth="106.0" text="Email" />
+                  <TableColumn fx:id="drivingLicenceColumn" prefWidth="115.0" text="DrivingLicenceType" />
+                  <TableColumn fx:id="drivingLessonColumn" prefWidth="112.0" text="DrivingLesson" />
               </columns>
             </TableView>
-            <Label layoutX="279.0" layoutY="217.0" prefHeight="18.0" prefWidth="90.0" text="following Exams:" textFill="#0d7c26" AnchorPane.leftAnchor="279.0">
+            <Label layoutX="309.0" layoutY="217.0" prefHeight="18.0" prefWidth="90.0" text="following Exams:" textFill="#0d7c26" AnchorPane.leftAnchor="309.0">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="376.0" layoutY="217.0" prefHeight="18.0" prefWidth="64.0" text="- 30.07.2022" textFill="#0d7c26">
+            <Label layoutX="406.0" layoutY="217.0" prefHeight="18.0" prefWidth="64.0" text="- 30.07.2022" textFill="#0d7c26">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="376.0" layoutY="235.0" prefHeight="18.0" prefWidth="63.0" text="- 27.08.2022" textFill="#0d7c26">
+            <Label layoutX="406.0" layoutY="235.0" prefHeight="18.0" prefWidth="63.0" text="- 27.08.2022" textFill="#0d7c26">
                <font>
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #E5DEBF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sample.fahrschuleapp.SignUpController">
+   <top>
+      <AnchorPane prefHeight="75.0" prefWidth="349.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="171.0" layoutY="26.0" prefHeight="23.0" prefWidth="179.0" text="Driving Lesson Page" textFill="#0d7c26" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <right>
+      <AnchorPane prefHeight="325.0" prefWidth="519.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="22.0" layoutY="19.0" text="Name:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="442.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nametxtfield" disable="true" layoutX="138.0" layoutY="14.0" prefHeight="25.0" prefWidth="117.0" promptText="name" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="279.0" layoutY="19.0" text="Surname:" textFill="#0d7c26" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="279.0" layoutY="50.0" text="Age:" textFill="#0d7c26" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="50.0" text="E-Mail:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="82.0" text="Phonenumber:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="105.0" text="Username:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="110.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="158.0" text="Password:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="saveDrivingLessonButton" layoutX="358.0" layoutY="225.0" mnemonicParsing="false" onAction="#saveUpdatedDrivingLessonButtonPressed" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #0D7C26;" text="Save" textFill="#e5debf" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="225.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <TextField fx:id="surnametxtfield" disable="true" layoutX="360.0" layoutY="14.0" prefHeight="25.0" prefWidth="118.0" promptText="surname" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="agetxtfield" disable="true" layoutX="362.0" layoutY="45.0" prefHeight="25.0" prefWidth="117.0" promptText="age" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="emailtxtfield" disable="true" layoutX="138.0" layoutY="45.0" prefHeight="25.0" prefWidth="117.0" promptText="e-mail adress" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="phonenumbertxtfield" disable="true" layoutX="138.0" layoutY="77.0" prefHeight="25.0" prefWidth="117.0" promptText="phonenumber" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="80.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="usernametxtfield" disable="true" layoutX="138.0" layoutY="113.0" prefHeight="25.0" prefWidth="168.0" promptText="you cant change username" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="110.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </TextField>
+            <Button fx:id="cancelsigninbtn" layoutX="358.0" layoutY="261.0" mnemonicParsing="false" onAction="#cancelSignInButtonPressed" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #0D7C26;" text="Cancel" textFill="#e5debf" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="40.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="registertxtlabel" layoutX="358.0" layoutY="205.0" prefHeight="17.0" prefWidth="121.0" textFill="RED" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="290.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="10.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordtxtfield" disable="true" layoutX="138.0" layoutY="161.0" prefHeight="25.0" prefWidth="168.0" promptText="password" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font name="Times New Roman" size="12.0" />
+               </font>
+            </PasswordField>
+            <Label layoutX="42.0" layoutY="230.0" text="Current Driving Lesson:" textFill="#0d7c26" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="230.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="newDLtextfield" layoutX="183.0" layoutY="225.0" prefHeight="25.0" prefWidth="149.0" promptText="Updated DrivingLesson (h)" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="225.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

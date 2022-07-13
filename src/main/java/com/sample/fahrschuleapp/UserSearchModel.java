@@ -7,7 +7,9 @@ public class UserSearchModel {
     String Role, Username, Password;
     String FirstName, SurName, Age, Email, Phonenumber;
     String DrivingLicenceType;
+    String DrivingLesson;
 
+    //For the TableViews on the InstructorView Page and AdminView Page.
 
     public UserSearchModel(String Role, String FirstName, String SurName,String Age, String Email, String Phonenumber, String Username,
                            String Password) {
@@ -21,12 +23,13 @@ public class UserSearchModel {
         this.Password = Password;
     }
 
-    public UserSearchModel(String FirstName, String SurName, String DrivingLicenceType, String Age, String Email) {
+    public UserSearchModel(String FirstName, String SurName,String Age, String Email, String DrivingLicenceType,  String DrivingLesson) {
         this.FirstName = FirstName;
         this.SurName = SurName;
-        this.DrivingLicenceType = DrivingLicenceType;
         this.Age = Age;
         this.Email = Email;
+        this.DrivingLicenceType = DrivingLicenceType;
+        this.DrivingLesson = DrivingLesson;
     }
 
 
@@ -96,5 +99,13 @@ public class UserSearchModel {
 
     public void setPhonenumber(String phonenumber) {
         Phonenumber = phonenumber;
+    }
+
+    public String getDrivingLesson() {
+        return DrivingLesson;
+    }
+
+    public void setDrivingLesson(String drivingLesson) {
+        DrivingLesson = drivingLesson;
     }
 }

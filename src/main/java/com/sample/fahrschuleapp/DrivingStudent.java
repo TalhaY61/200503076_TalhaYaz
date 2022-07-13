@@ -15,7 +15,6 @@ public class DrivingStudent extends Person{
         this.infoInstructor = infoInstructor;
     }
 
-
     public int getPrice() {
         return price;
     }

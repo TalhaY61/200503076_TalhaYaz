@@ -45,46 +45,47 @@ public class InstructorController implements Initializable {
     private TableColumn<UserSearchModel, String> ageColumn;
     @FXML
     private TableColumn<UserSearchModel, String> emailColumn;
+    @FXML
+    private TableColumn<UserSearchModel, String> drivingLessonColumn;
 
     ObservableList<UserSearchModel> studentSearchModel = FXCollections.observableArrayList();
 
+    UserSearchModel user;
     DatabaseConnection connectNow = new DatabaseConnection();
+    Connection connectDB = connectNow.getConnection();
 
     private Stage stage;
-    private Scene scene;
     private Parent root;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Connection connectDB = connectNow.getConnection();
-
+        //Get Student information for the TableView in the InstructorView
         //SQL Query - Execute in the backend Database
-        String userViewQuery = "SELECT FirstName, SurName, DrivingLicenceType, Age, Email FROM student";
-
+        String studentViewQuery = connectNow.getStudentData();
         try {
             Statement statement = connectDB.createStatement();
-            ResultSet queryOutput = statement.executeQuery(userViewQuery);
+            ResultSet queryOutput = statement.executeQuery(studentViewQuery);
 
             while(queryOutput.next()) {
-
                 String queryFirstName = queryOutput.getString("FirstName");
                 String querySurName = queryOutput.getString("SurName");
-                String queryDrivingLicence = queryOutput.getString("DrivingLicenceType");
                 String queryAge = queryOutput.getString("Age");
                 String queryEmail = queryOutput.getString("Email");
+                String queryDrivingLicence = queryOutput.getString("DrivingLicenceType");
+                String queryDrivingLesson = queryOutput.getString("DrivingLesson");
 
                 //Populate the ObservableList
-                studentSearchModel.add(new UserSearchModel(queryFirstName, querySurName, queryDrivingLicence, queryAge, queryEmail));
+                studentSearchModel.add(new UserSearchModel(queryFirstName, querySurName, queryAge, queryEmail, queryDrivingLicence, queryDrivingLesson));
             }
 
             firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
             surNameColumn.setCellValueFactory(new PropertyValueFactory<>("SurName"));
-            drivingLicenceColumn.setCellValueFactory(new PropertyValueFactory<>("DrivingLicenceType"));
             ageColumn.setCellValueFactory(new PropertyValueFactory<>("Age"));
             emailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
-
+            drivingLicenceColumn.setCellValueFactory(new PropertyValueFactory<>("DrivingLicenceType"));
+            drivingLessonColumn.setCellValueFactory(new PropertyValueFactory<>("DrivingLesson"));
 
             studentTableView.setItems(studentSearchModel);
             studentTableView.refresh();
@@ -96,9 +97,7 @@ public class InstructorController implements Initializable {
     }
 
     public void logoutButtonPressed(ActionEvent event) throws IOException {
-
-        //Das ist für den Scene wechsel, kannst du überall benutzen aber ändere den Namen des fxml file,
-        // zu den du wechseln willst.
+        //Logout Button. Switch to the Login Page
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         stage = (Stage) logoutbtn.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));

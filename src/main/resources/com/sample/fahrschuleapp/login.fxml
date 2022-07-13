@@ -15,7 +15,7 @@
    <top>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #E5DEBF;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="157.0" fitWidth="304.0" layoutX="108.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="157.0" fitWidth="304.0" layoutX="108.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="108.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="30.0">
                <image>
                   <Image url="@../../../../../../images/YAZFahrschule1.png" />
                </image>
@@ -26,42 +26,42 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="138.0" layoutY="14.0" text="Username" textFill="#0d7c26">
+            <Label layoutX="138.0" layoutY="14.0" text="Username:" textFill="#0d7c26" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="15.0">
                <font>
-                  <Font name="Times New Roman" size="13.0" />
+                  <Font name="Times New Roman Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="138.0" layoutY="46.0" text="Password:" textFill="#0d7c26">
+            <Label layoutX="138.0" layoutY="46.0" text="Password:" textFill="#0d7c26" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="45.0">
                <font>
-                  <Font name="Times New Roman" size="13.0" />
+                  <Font name="Times New Roman Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="usernametxtfield" layoutX="215.0" layoutY="9.0" prefHeight="26.0" prefWidth="173.0" promptText="username">
+            <TextField fx:id="usernametxtfield" layoutX="215.0" layoutY="9.0" prefHeight="26.0" prefWidth="173.0" promptText="username" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="15.0">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="passwordtxtfield" layoutX="215.0" layoutY="41.0" prefHeight="26.0" prefWidth="173.0" promptText="password">
+            <PasswordField fx:id="passwordtxtfield" layoutX="215.0" layoutY="41.0" prefHeight="26.0" prefWidth="173.0" promptText="password" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="45.0">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </PasswordField>
-            <Button fx:id="loginbtn" layoutX="312.0" layoutY="98.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Login" textFill="#e5debf" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="loginbtn" layoutX="312.0" layoutY="98.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Login" textFill="#e5debf" textOverrun="WORD_ELLIPSIS" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="130.0">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Button>
-            <Text fill="#0d7c26" layoutX="14.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="yazfahrschule@hotmail.com" wrappingWidth="159.3232421875">
+            <Text fill="#0d7c26" layoutX="14.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="yazfahrschule@hotmail.com" wrappingWidth="159.3232421875" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="345.6767578125" AnchorPane.topAnchor="170.0">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Text>
-            <Button fx:id="exitButton" layoutX="312.0" layoutY="132.0" mnemonicParsing="false" onAction="#exitButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Exit" textFill="#e5debf" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="exitButton" layoutX="312.0" layoutY="132.0" mnemonicParsing="false" onAction="#exitButtonOnAction" prefHeight="25.0" prefWidth="76.0" style="-fx-background-color: #0D7C26;" text="Exit" textFill="#e5debf" textOverrun="WORD_ELLIPSIS" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="130.0">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Button>
-            <Label fx:id="loginmissinglabel" layoutX="215.0" layoutY="76.0" textFill="RED">
+            <Label fx:id="loginmissinglabel" layoutX="142.0" layoutY="76.0" prefHeight="11.0" prefWidth="248.0" textFill="RED" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="80.0">
                <font>
                   <Font name="Times New Roman Bold" size="10.0" />
                </font>

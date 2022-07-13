@@ -1,6 +1,5 @@
 package com.sample.fahrschuleapp;
 
-
 public class Person {
 
     private String name;

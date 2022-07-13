@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 
 public class AdminController implements Initializable {
 
-
     @FXML
     private Button registerInstructor, registerStudent; //für das registieren der studenten/lehrer
     @FXML
@@ -37,10 +36,11 @@ public class AdminController implements Initializable {
     @FXML
     private Button updateStudent, updateInstructor;
     @FXML
-    private Button refreshbtn;
+    private Button refreshbtn, addDrivingLButton;
     @FXML
-    private Label messageLabel;
+    private Label alertMessageLabel;
 
+    //TableView im AdminView Pannel, welches Schüler und Lehrer anzeigt
     @FXML
     private TableView<UserSearchModel> userTabelView;
     @FXML
@@ -59,6 +59,7 @@ public class AdminController implements Initializable {
     private TableColumn<UserSearchModel, String> phonenumberColumn;
     @FXML
     private TableColumn<UserSearchModel, String> passwordColumn;
+
     @FXML
     private TextField searchTextField;
 
@@ -67,21 +68,16 @@ public class AdminController implements Initializable {
 
 
     DatabaseConnection connectNow = new DatabaseConnection();
+    Connection connectDB = connectNow.getConnection();
 
     private Stage stage;
-    private Scene scene;
     private Parent root;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Connection connectDB = connectNow.getConnection();
-
-        //SQL Query - Execute in the backend Database
-        String userViewQuery = "SELECT Role, FirstName, SurName, Age, Email, Phonenumber, Username, Password FROM instructor\n" +
-                "UNION\n" +
-                "SELECT Role, FirstName, SurName, Age, Email, Phonenumber, Username, Password FROM student";
-
+        String userViewQuery = connectNow.getUserData();
+        //TableView in AdminView from Student and Instructor
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryOutput = statement.executeQuery(userViewQuery);
@@ -116,6 +112,7 @@ public class AdminController implements Initializable {
 
             //Initila filtered List
             FilteredList<UserSearchModel> filteredData = new FilteredList<>(userSearchObserverList, b -> true);
+
 
             searchTextField.textProperty().addListener((observable,oldValue, newValue) ->  {
                 filteredData.setPredicate(userSearchModel -> {
@@ -160,41 +157,35 @@ public class AdminController implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void logoutButtonPressed(ActionEvent event) throws IOException {
-        //switch zur LogOut Seite zurück.
+        //switch to the Login-Page
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         stage = (Stage) logoutbtn.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }
     public void registerInstructorButtonPressed(ActionEvent event) throws IOException {
-        //switche zur SignUp Seite und register die jeweilige Person.
+        //Switch to the InstructorSignUpPage and register the Instructor.
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("InstructorSignUpPage.fxml")));
         stage = (Stage) registerInstructor.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }
     public void registerStudentButtonPressed(ActionEvent event) throws IOException {
-        //switche zur SignUp Seite und register die jeweilige Person.
+        //Switch to the StudentSignUpPage and register the Student.
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("StudentSignUpPage.fxml")));
-        //getClass().getResource("StudentSignUpPage.fxml") might be null sagt er
         stage = (Stage) registerStudent.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));
         stage.show();
     }
 
-    //delete button kann man verknüpfen denke ich
-
     public void deleteUserButtonPressed(ActionEvent event) throws IOException {
-        //delete den ausgewählten user
-
+        //Delete the selected User.
         if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Student")) {
-            DatabaseConnection connectNow = new DatabaseConnection();
-            Connection connectDB = connectNow.getConnection();
-            String name = userTabelView.getSelectionModel().getSelectedItem().getFirstName();
 
-
-            String deleteUser = "DELETE FROM Student WHERE FirstName = '" + name + "';";
+            String username = userTabelView.getSelectionModel().getSelectedItem().getUsername();
+            String deleteUser = connectNow.deleteStudent(username);
             try {
                 Statement statement = connectDB.createStatement();
                 statement.executeUpdate(deleteUser);
@@ -205,11 +196,9 @@ public class AdminController implements Initializable {
             }
 
         } else if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Instructor")) {
-            DatabaseConnection connectNow = new DatabaseConnection();
-            Connection connectDB = connectNow.getConnection();
-            String name = userTabelView.getSelectionModel().getSelectedItem().getFirstName();
 
-            String deleteUser = "DELETE FROM Instructor WHERE FirstName = '" + name + "';";
+            String username = userTabelView.getSelectionModel().getSelectedItem().getUsername();
+            String deleteUser = connectNow.deleteInstructor(username);
             try {
                 Statement statement = connectDB.createStatement();
                 statement.executeUpdate(deleteUser);
@@ -219,13 +208,13 @@ public class AdminController implements Initializable {
                 e.getCause();
             }
         }else {
-            messageLabel.setText("Error! Could not delete the selected User. Try Again!");
+            alertMessageLabel.setText("Error! Could not delete the selected User. Try Again!");
         }
 
     }
 
     public void refreshButtonPressed(ActionEvent event) throws IOException {
-        //Statt die refresh funktion zu benutzen, loade ich einfach die AdminView Szene von neu!
+        //Load AdminView again to refresh the TableView
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
         stage = (Stage) refreshbtn.getScene().getWindow();
         stage.setScene(new Scene(root, 520, 400));
@@ -233,38 +222,73 @@ public class AdminController implements Initializable {
     }
 
     public void updateInstructorButtonPressed() throws IOException {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
 
+        //IF the selected Row has the Role Column equal to "Instructor", switch to UpdateInstructorPage
+        // and update the information from the Student
         user = userTabelView.getSelectionModel().getSelectedItem();
-        FXMLLoader loader = new FXMLLoader ();
-        loader.setLocation(getClass().getResource("UpdateInstructorPage.fxml"));
-        try {
-            loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        String control = userTabelView.getSelectionModel().getSelectedItem().getRole();
+
+        if (control.equals("Student")) alertMessageLabel.setText("Wrong Button for the selected User");
+        else {
+            FXMLLoader loader = new FXMLLoader ();
+            loader.setLocation(getClass().getResource("UpdateInstructorPage.fxml"));
+            try {
+                loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            SignUpController signUpController = loader.getController();
+            signUpController.setTextField(user.getFirstName(), user.getSurName(),
+                    user.getEmail(),user.getAge(), user.getPhonenumber(),
+                    user.getUsername(), user.getPassword());
+
+            Parent parent = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
         }
-
-        SignUpController signUpController = loader.getController();
-        signUpController.setTextField(user.getFirstName(), user.getSurName(),
-                 user.getEmail(),user.getAge(), user.getPhonenumber(),
-                user.getUsername(), user.getPassword());
-
-        Parent parent = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(parent));
-        stage.initStyle(StageStyle.UTILITY);
-        stage.show();
     }
 
 
     public void updateStudentButtonPressed() throws IOException {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
 
+        //IF the selected Row has the Role Column equal to "Student", switch to UpdateStudentPage
+        // and update the information from the Student
+        user = userTabelView.getSelectionModel().getSelectedItem();
+        String control = userTabelView.getSelectionModel().getSelectedItem().getRole();
+
+        if (control.equals("Instructor")) alertMessageLabel.setText("Wrong Button for the selected User");
+        else {
+            FXMLLoader loader = new FXMLLoader ();
+            loader.setLocation(getClass().getResource("UpdateStudentPage.fxml"));
+            try {
+                loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            SignUpController signUpController = loader.getController();
+            signUpController.setTextField(user.getFirstName(), user.getSurName(),
+                    user.getEmail(),user.getAge(), user.getPhonenumber(),
+                    user.getUsername(), user.getPassword());
+
+            Parent parent = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        }
+    }
+
+    public void addDrivingLessonButtonPressed (ActionEvent event) {
+
+        //get the information from the Student-Columns and open the AddDrivingLessonPage,
+        //here you can add Driving Lessons by hour to the student.
         user = userTabelView.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader ();
-        loader.setLocation(getClass().getResource("UpdateStudentPage.fxml"));
+        loader.setLocation(getClass().getResource("AddDrivingLessonPage.fxml"));
         try {
             loader.load();
         } catch (IOException ex) {
@@ -282,16 +306,4 @@ public class AdminController implements Initializable {
         stage.initStyle(StageStyle.UTILITY);
         stage.show();
     }
-
-    public void viewDrivingLessonButtonPressed(ActionEvent event) {
-        //Das ansehen der Fahrstunden der Schüler in einer Art Kalender vlt
-    }
-
-    public void addDrivingLessonButtonPressed (ActionEvent event) {
-        //Das hinzufügen von Fahrstunden für die Schüler, für neu
-        // angemeldete und bevorstehende.
-    }
-
-
-
 }

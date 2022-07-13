@@ -5,7 +5,6 @@ public class DrivingLesson {
     private String drivingStudent;
     private String drivingInstructor;
 
-
     public DrivingLesson(String drivingStudent, String drivingInstructor, String date) {
         this.drivingInstructor = drivingInstructor;
         this.drivingStudent = drivingStudent;

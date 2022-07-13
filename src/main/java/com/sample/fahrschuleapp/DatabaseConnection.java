@@ -23,16 +23,28 @@ public class DatabaseConnection {
         }
         return databaseLink;
     }
+    public String getUserData() {
+        String query = "SELECT Role, FirstName, SurName, Age, Email, Phonenumber, Username, Password FROM instructor\n" +
+                "UNION\n" +
+                "SELECT Role, FirstName, SurName, Age, Email, Phonenumber, Username, Password FROM student";
 
-    /*
-    public String getInstructorData() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
+        return query;
+    }
 
-        String getFields = "SELECT * FROM Instructor";
-        return getFields;
-    } */
+    public String getStudentData() {
+        String query = "SELECT FirstName, SurName, Age, Email, DrivingLicenceType, DrivingLesson FROM student;";
+        return query;
+    }
 
+    public String deleteStudent(String username) {
+        String deleteUser = "DELETE FROM Student WHERE Username = '" + username + "';";
+        return deleteUser;
+    }
+
+    public String deleteInstructor(String username) {
+        String deleteUser = "DELETE FROM Instructor WHERE Username = '" + username + "';";
+        return deleteUser;
+    }
 
     public String registerInstructor(String firstname, String surname, String age, String email,
                                      String phonenumber, String gender, String salary, String username, String password) {
@@ -73,5 +85,13 @@ public class DatabaseConnection {
                 +"', Email = '"+ email +" ', Phonenumber = '"+ phonenumber +"', Password = ' " + password + " ' WHERE username = '" + username+"';\n";
 
         return updateFields;
+    }
+
+
+    //Get and Updata DrivingLesson (hour) for Student in "AddDrivingLessonPage"
+
+    public String updateCurrentDrivingLesson(String updatedValue, String username) {
+        String updatefield = "Update Student SET DrivingLesson = ' "+updatedValue+"' WHERE username = '"+ username +"';";
+        return updatefield;
     }
 }

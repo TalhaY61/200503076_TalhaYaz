@@ -1,8 +1,13 @@
 package com.sample.fahrschuleapp;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class DatabaseConnection {
 
@@ -46,17 +51,23 @@ public class DatabaseConnection {
         return deleteUser;
     }
 
-    public String registerInstructor(String firstname, String surname, String age, String email,
+    public void registerInstructor(String firstname, String surname, String age, String email,
                                      String phonenumber, String gender, String salary, String username, String password) {
 
         String insertFields = "INSERT INTO instructor (FirstName, SurName, Age, Email, Phonenumber, Gender, Salary, Username, Password, Role) VALUES ('";
         String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + salary + "','" + username + "','" + password + "','Instructor');";
         String insertToRegister = insertFields + insertValues;
 
-        return insertToRegister;
+        try {
+            Statement statement = getConnection().createStatement();
+            statement.executeUpdate(insertToRegister);
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
-    public String registerStudent(String firstname, String surname, String age, String email, String phonenumber,
+    public void registerStudent(String firstname, String surname, String age, String email, String phonenumber,
                                   String gender, String price, String drivingLicence, String username, String password, String InfoInstructor) {
 
         String insertFields = "INSERT INTO student (FirstName, SurName, Age, Email, Phonenumber, " +
@@ -64,34 +75,59 @@ public class DatabaseConnection {
         String insertValues = firstname + "','" + surname + "','" + age + "','" + email + "','" + phonenumber + "','" + gender + "','" + price + "','" + drivingLicence + "','" + username + "','" + password + "','Student', '" + InfoInstructor + "');";
         String insertToRegister = insertFields + insertValues;
 
-        return insertToRegister;
+        try {
+            Statement statement = getConnection().createStatement();
+            statement.executeUpdate(insertToRegister);
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
-    public String updateInstructor(String firstname, String surname, String age, String email, String phonenumber,
+    public void updateInstructor(String firstname, String surname, String age, String email, String phonenumber,
                                     String username, String password) {
-
 
         String updateFields = "UPDATE Instructor SET FirstName = '"+ firstname +" ', SurName = '"+ surname +" ', Age = '"+ age
                 +"', Email = '"+ email +" ', Phonenumber = '"+ phonenumber +"', Password = ' " + password + " ' WHERE username = '" + username+"';\n";
 
-        return updateFields;
+        try {
+            Statement statement = getConnection().createStatement();
+            statement.executeUpdate(updateFields);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
-    public String updateStudent(String firstname, String surname, String age, String email, String phonenumber,
+    public void updateStudent(String firstname, String surname, String age, String email, String phonenumber,
                                    String username, String password) {
-
 
         String updateFields = "UPDATE Student SET FirstName = '"+ firstname +" ', SurName = '"+ surname +" ', Age = '"+ age
                 +"', Email = '"+ email +" ', Phonenumber = '"+ phonenumber +"', Password = ' " + password + " ' WHERE username = '" + username+"';\n";
 
-        return updateFields;
-    }
+        try {
+            Statement statement = getConnection().createStatement();
+            statement.executeUpdate(updateFields);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+    }
 
     //Get and Updata DrivingLesson (hour) for Student in "AddDrivingLessonPage"
 
-    public String updateCurrentDrivingLesson(String updatedValue, String username) {
+    public void updateCurrentDrivingLesson(String updatedValue, String username) {
         String updatefield = "Update Student SET DrivingLesson = ' "+updatedValue+"' WHERE username = '"+ username +"';";
-        return updatefield;
+
+        try {
+            Statement statement = getConnection().createStatement();
+            statement.executeUpdate(updatefield);
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 }

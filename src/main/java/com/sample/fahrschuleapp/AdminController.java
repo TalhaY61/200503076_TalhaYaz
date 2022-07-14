@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -34,7 +35,7 @@ public class AdminController implements Initializable {
     @FXML
     private Button addDrivingLessonBtn, viewDrivingLessonBtn;
     @FXML
-    private Button updateStudent, updateInstructor;
+    private Button updateStudent, updateInstructor, updateUserButton;
     @FXML
     private Button refreshbtn, addDrivingLButton;
     @FXML
@@ -189,6 +190,8 @@ public class AdminController implements Initializable {
             try {
                 Statement statement = connectDB.createStatement();
                 statement.executeUpdate(deleteUser);
+                alertMessageLabel.setTextFill(Color.GREEN);
+                alertMessageLabel.setText("User deleted successfully");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -201,7 +204,8 @@ public class AdminController implements Initializable {
             String deleteUser = connectNow.deleteInstructor(username);
             try {
                 Statement statement = connectDB.createStatement();
-                statement.executeUpdate(deleteUser);
+                statement.executeUpdate(deleteUser);alertMessageLabel.setTextFill(Color.GREEN);
+                alertMessageLabel.setText("User deleted successfully");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -210,57 +214,14 @@ public class AdminController implements Initializable {
         }else {
             alertMessageLabel.setText("Error! Could not delete the selected User. Try Again!");
         }
-
     }
 
-    public void refreshButtonPressed(ActionEvent event) throws IOException {
-        //Load AdminView again to refresh the TableView
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
-        stage = (Stage) refreshbtn.getScene().getWindow();
-        stage.setScene(new Scene(root, 520, 400));
-        stage.show();
-    }
+    public void UpdateUserButtonPressed(ActionEvent event) {
 
-    public void updateInstructorButtonPressed() throws IOException {
-
-        //IF the selected Row has the Role Column equal to "Instructor", switch to UpdateInstructorPage
-        // and update the information from the Student
-        user = userTabelView.getSelectionModel().getSelectedItem();
-        String control = userTabelView.getSelectionModel().getSelectedItem().getRole();
-
-        if (control.equals("Student")) alertMessageLabel.setText("Wrong Button for the selected User");
-        else {
-            FXMLLoader loader = new FXMLLoader ();
-            loader.setLocation(getClass().getResource("UpdateInstructorPage.fxml"));
-            try {
-                loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            SignUpController signUpController = loader.getController();
-            signUpController.setTextField(user.getFirstName(), user.getSurName(),
-                    user.getEmail(),user.getAge(), user.getPhonenumber(),
-                    user.getUsername(), user.getPassword());
-
-            Parent parent = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(parent));
-            stage.initStyle(StageStyle.UTILITY);
-            stage.show();
-        }
-    }
+        if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Student")) {
 
 
-    public void updateStudentButtonPressed() throws IOException {
-
-        //IF the selected Row has the Role Column equal to "Student", switch to UpdateStudentPage
-        // and update the information from the Student
-        user = userTabelView.getSelectionModel().getSelectedItem();
-        String control = userTabelView.getSelectionModel().getSelectedItem().getRole();
-
-        if (control.equals("Instructor")) alertMessageLabel.setText("Wrong Button for the selected User");
-        else {
+            user = userTabelView.getSelectionModel().getSelectedItem();
             FXMLLoader loader = new FXMLLoader ();
             loader.setLocation(getClass().getResource("UpdateStudentPage.fxml"));
             try {
@@ -279,31 +240,69 @@ public class AdminController implements Initializable {
             stage.setScene(new Scene(parent));
             stage.initStyle(StageStyle.UTILITY);
             stage.show();
+
+        } else if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Instructor")) {
+
+            user = userTabelView.getSelectionModel().getSelectedItem();
+            FXMLLoader loader = new FXMLLoader ();
+            loader.setLocation(getClass().getResource("UpdateInstructorPage.fxml"));
+            try {
+                loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            SignUpController signUpController = loader.getController();
+            signUpController.setTextField(user.getFirstName(), user.getSurName(),
+                    user.getEmail(),user.getAge(), user.getPhonenumber(),
+                    user.getUsername(), user.getPassword());
+
+            Parent parent = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        }else {
+            alertMessageLabel.setText("Error! Could not update the selected User. Try Again!");
         }
     }
+    public void refreshButtonPressed(ActionEvent event) throws IOException {
+        //Load AdminView again to refresh the TableView
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
+        stage = (Stage) refreshbtn.getScene().getWindow();
+        stage.setScene(new Scene(root, 520, 400));
+        stage.show();
+    }
+
 
     public void addDrivingLessonButtonPressed (ActionEvent event) {
 
         //get the information from the Student-Columns and open the AddDrivingLessonPage,
         //here you can add Driving Lessons by hour to the student.
         user = userTabelView.getSelectionModel().getSelectedItem();
-        FXMLLoader loader = new FXMLLoader ();
-        loader.setLocation(getClass().getResource("AddDrivingLessonPage.fxml"));
-        try {
-            loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (userTabelView.getSelectionModel().getSelectedItem().getRole().equals("Student")) {
+            FXMLLoader loader = new FXMLLoader ();
+            loader.setLocation(getClass().getResource("AddDrivingLessonPage.fxml"));
+            try {
+                loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            SignUpController signUpController = loader.getController();
+            signUpController.setTextField(user.getFirstName(), user.getSurName(),
+                    user.getEmail(),user.getAge(), user.getPhonenumber(),
+                    user.getUsername(), user.getPassword());
+
+            Parent parent = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } else {
+            alertMessageLabel.setText("Please select a Student");
         }
 
-        SignUpController signUpController = loader.getController();
-        signUpController.setTextField(user.getFirstName(), user.getSurName(),
-                user.getEmail(),user.getAge(), user.getPhonenumber(),
-                user.getUsername(), user.getPassword());
-
-        Parent parent = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(parent));
-        stage.initStyle(StageStyle.UTILITY);
-        stage.show();
     }
 }

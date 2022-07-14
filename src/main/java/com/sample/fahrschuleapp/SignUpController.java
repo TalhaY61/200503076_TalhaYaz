@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -78,9 +79,8 @@ public class SignUpController implements Initializable {
         registerStudent();
     }
 
-    public void registerInstructor(){
+    public void registerInstructor() throws IOException {
         //Register the Instructor and connect it with the SQL Database
-
         String firstname = nametxtfield.getText();
         String surname = surnametxtfield.getText();
         String age = agetxtfield.getText();
@@ -90,29 +90,20 @@ public class SignUpController implements Initializable {
         String password = passwordtxtfield.getText();
         String gender = gendertxtfield.getText();
         String salary = salarytxtfield.getText();
-
         int minGehalt = Integer.parseInt(salary);
 
-        if (minGehalt <= 4500) registertxtlabel.setText("Gehalt muss mehr als 4500$ sein!");
+        if (minGehalt <= 4500) registertxtlabel.setText("Gehalt muss mehr als 4500 sein!");
         else {
-            String registered = dc.registerInstructor(firstname, surname, age, email, phonenumber, gender, salary, username, password);
-            try {
-                Statement statement = connectDB.createStatement();
-                statement.executeUpdate(registered);
-                registertxtlabel.setText("Instructor has been registered!");
-                //After Registered change scene to AdminView.
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
-                stage = (Stage) registerbtn.getScene().getWindow();
-                stage.setScene(new Scene(root, 520, 400));
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-                e.getCause();
-            }
+            dc.registerInstructor(firstname, surname, age, email, phonenumber, gender, salary, username, password);
+            //After Registered change scene to AdminView.
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
+            stage = (Stage) registerbtn.getScene().getWindow();
+            stage.setScene(new Scene(root, 520, 400));
+            stage.show();
         }
 
     }
-    public void registerStudent(){
+    public void registerStudent() throws IOException {
         //Register the Student and connect it with the SQL Database
 
         String firstname = nametxtfield.getText();
@@ -128,21 +119,12 @@ public class SignUpController implements Initializable {
         String InfoInstructor = infoInstructortxtfield.getText();
 
         if(drivingLicence.equals("A1") || drivingLicence.equals("A2") || drivingLicence.equals("B") || drivingLicence.equals("B1")) {
-            String registered = dc.registerStudent(firstname, surname, age, email, phonenumber, gender, price, drivingLicence, username, password, InfoInstructor);
-            try {
-                Statement statement = connectDB.createStatement();
-                statement.executeUpdate(registered);
-                registertxtlabel.setText("Student has been registered!");
-
-                //After Registered change scene to AdminView.
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
-                stage = (Stage) registerbtn.getScene().getWindow();
-                stage.setScene(new Scene(root, 520, 400));
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-                e.getCause();
-            }
+            dc.registerStudent(firstname, surname, age, email, phonenumber, gender, price, drivingLicence, username, password, InfoInstructor);
+            //After Registered change scene to AdminView.
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
+            stage = (Stage) registerbtn.getScene().getWindow();
+            stage.setScene(new Scene(root, 520, 400));
+            stage.show();
         } else {
             registertxtlabel.setText("Wrong Driving Licence Type entered!");
         }
@@ -161,7 +143,7 @@ public class SignUpController implements Initializable {
 
     }
 
-    public void saveUpdatedStudentButtonPressed(ActionEvent event) {
+    public void saveUpdatedStudentButtonPressed(ActionEvent event) throws IOException {
 
         String firstname = nametxtfield.getText();
         String surname = surnametxtfield.getText();
@@ -172,24 +154,13 @@ public class SignUpController implements Initializable {
         String password = passwordtxtfield.getText();
 
         //Die Befehle wurden in der "DatabaseConnection" Klasse hinzugefügt.
-        String updated = dc.updateStudent(firstname, surname, age, email, phonenumber, username, password);
-        try {
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(updated);
-            registertxtlabel.setText("Student has been updated!");
+        dc.updateStudent(firstname, surname, age, email, phonenumber, username, password);
+        registertxtlabel.setTextFill(Color.GREEN);
+        registertxtlabel.setText("User Updated successfully");
 
-            /*After Registered change scene to AdminView.
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
-            stage = (Stage) registerbtn.getScene().getWindow();
-            stage.setScene(new Scene(root, 520, 400));
-            stage.show(); */
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
     }
 
-    public void saveUpdatedInstructorButtonPressed(ActionEvent event) {
+    public void saveUpdatedInstructorButtonPressed(ActionEvent event) throws IOException {
 
         String firstname = nametxtfield.getText();
         String surname = surnametxtfield.getText();
@@ -199,31 +170,21 @@ public class SignUpController implements Initializable {
         String username = usernametxtfield.getText();
         String password = passwordtxtfield.getText();
 
-        String updated = dc.updateInstructor(firstname, surname, age, email, phonenumber, username, password);
-        try {
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(updated);
-            registertxtlabel.setText("Instructor has been updated!");
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
+        dc.updateInstructor(firstname, surname, age, email, phonenumber, username, password);
+        registertxtlabel.setTextFill(Color.GREEN);
+        registertxtlabel.setText("User Updated successfully");
     }
 
-    public void saveUpdatedDrivingLessonButtonPressed(ActionEvent event) {
+    public void saveUpdatedDrivingLessonButtonPressed(ActionEvent event) throws IOException {
 
         String username = usernametxtfield.getText();
         String newDrivingL = newDLtextfield.getText();
 
-        String updated = dc.updateCurrentDrivingLesson(newDrivingL, username);
+        dc.updateCurrentDrivingLesson(newDrivingL, username);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AdminView.fxml")));
+        stage = (Stage) saveDrivingLessonButton.getScene().getWindow();
+        stage.setScene(new Scene(root, 520, 400));
+        stage.show();
 
-        try {
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(updated);
-            registertxtlabel.setText("Add Driving Lessons successfully!");
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
     }
 }

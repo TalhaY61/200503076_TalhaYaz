@@ -82,21 +82,16 @@
                   <Font name="Times New Roman Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="updateStudent" alignment="CENTER" layoutX="124.0" layoutY="88.0" mnemonicParsing="false" onAction="#updateStudentButtonPressed" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Update Student" textFill="#e5debf" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="85.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="updateInstructor" alignment="CENTER" layoutX="6.0" layoutY="88.0" mnemonicParsing="false" onAction="#updateInstructorButtonPressed" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #0D7C26;" text="Update Instructor" textFill="#e5debf" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="85.0">
-               <font>
-                  <Font name="Times New Roman Bold" size="12.0" />
-               </font>
-            </Button>
             <Label fx:id="alertMessageLabel" layoutX="15.0" layoutY="262.0" prefHeight="17.0" prefWidth="222.0" textFill="#a40000" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="5.0">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
             </Label>
+            <Button fx:id="updateUserButton" alignment="CENTER" layoutX="11.0" layoutY="87.0" mnemonicParsing="false" onAction="#UpdateUserButtonPressed" prefHeight="22.0" prefWidth="220.0" style="-fx-background-color: #0D7C26;" text="Update Instructor/ Student" textFill="#e5debf" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font name="Times New Roman Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </right>
